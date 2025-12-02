@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1200.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.regge.CadastroDadosEstudosController">
+   <children>
+      <VBox alignment="CENTER" prefWidth="1200.0">
+         <children>
+            <Label style="-fx-background-color: #f4f4f4;" text="Cadastro Dados Estudos" textFill="#2e786f">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="726.0" prefWidth="1190.0" style="-fx-padding: 10;">
+               <children>
+                  <StackPane alignment="TOP_LEFT">
+                     <children>
+                        <VBox prefHeight="104.0" prefWidth="1160.0" style="-fx-border-color: #bfbfbfbf; -fx-background-radius: 10; -fx-border-width: 2; -fx-padding: 10;">
+                           <children>
+                              <HBox prefHeight="50.0" prefWidth="1160.0">
+                                 <children>
+                                    <VBox prefHeight="49.0" prefWidth="215.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Nome Estudo">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="234.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="49.0" prefWidth="209.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Protocolo">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="224.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="49.0" prefWidth="236.0">
+                                       <children>
+                                          <Label prefHeight="20.0" prefWidth="102.0" text="Patrocinador">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="157.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="49.0" prefWidth="275.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" graphicTextGap="10.0" maxWidth="20.0" prefHeight="20.0" text="PI">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="173.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="37.0" prefWidth="177.0">
+                                       <children>
+                                          <Label prefHeight="20.0" prefWidth="104.0" text="CRO/PAGADOR">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="177.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="1160.0">
+                                 <children>
+                                    <VBox prefHeight="45.0" prefWidth="226.0">
+                                       <children>
+                                          <Label text="Coordenador">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="178.0">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="226.0">
+                                       <children>
+                                          <Label text="Patologia">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="165.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="157.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <Label text="Tipo de Estudo">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox prefHeight="25.0" prefWidth="170.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="157.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <Label text="Via Medicamento">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox prefHeight="25.0" prefWidth="174.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="184.0">
+                                       <children>
+                                          <Label text="Recrutamento">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox prefHeight="25.0" prefWidth="190.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="150.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Nº do centro">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                        <Label alignment="TOP_LEFT" prefHeight="27.0" style="-fx-background-color: #f4f4f4;" text="Geral" textFill="#2e786f" textOverrun="CLIP" translateY="-15.0">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="20.0" />
+                           </StackPane.margin>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="TOP_LEFT">
+                     <children>
+                        <VBox prefHeight="104.0" prefWidth="1160.0" style="-fx-border-color: #bfbfbfbf; -fx-background-radius: 10; -fx-border-width: 2; -fx-padding: 10;">
+                           <children>
+                              <HBox prefHeight="50.0" prefWidth="1160.0">
+                                 <children>
+                                    <VBox prefHeight="45.0" prefWidth="271.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" graphicTextGap="10.0" text="C.A.A.E.">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="172.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="50.0" prefWidth="516.0">
+                                       <children>
+                                          <Label graphicTextGap="10.0" text="Distrinuição CIOM's / SUSAR's" wrapText="true">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="313.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="339.0">
+                                       <children>
+                                          <Label text="Login e Senha">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="222.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="1160.0">
+                                 <children>
+                                    <VBox prefHeight="45.0" prefWidth="226.0">
+                                       <children>
+                                          <Label text="Coordenador">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="178.0">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="226.0">
+                                       <children>
+                                          <Label text="Patologia">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="165.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="157.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <Label text="Tipo de Estudo">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox prefHeight="25.0" prefWidth="170.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="157.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <Label text="Via Medicamento">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox prefHeight="25.0" prefWidth="174.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="184.0">
+                                       <children>
+                                          <Label text="Recrutamento">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox prefHeight="25.0" prefWidth="190.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="150.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Nº do centro">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                        <Label alignment="TOP_LEFT" prefHeight="27.0" style="-fx-background-color: #f4f4f4;" text="Regulatório" textFill="#2e786f" textOverrun="CLIP" translateY="-15.0">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="20.0" />
+                           </StackPane.margin>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="-1.0" />
+                     </VBox.margin>
+                  </StackPane>
+                  <StackPane alignment="TOP_LEFT">
+                     <children>
+                        <VBox prefHeight="104.0" prefWidth="1160.0" style="-fx-border-color: #bfbfbfbf; -fx-background-radius: 10; -fx-border-width: 2; -fx-padding: 10;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <HBox prefHeight="65.0" prefWidth="1160.0">
+                                 <children>
+                                    <VBox prefHeight="50.0" prefWidth="309.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Monitor(a)">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="50.0" prefWidth="188.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Função">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox prefHeight="25.0" prefWidth="188.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="45.0" prefWidth="619.0">
+                                       <children>
+                                          <Label prefHeight="15.0" prefWidth="100.0" text="E-mail" wrapText="true">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="25.0" prefWidth="624.0" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <TableView minHeight="140.0" prefHeight="150.0" prefWidth="1146.0">
+                                 <columns>
+                                    <TableColumn prefWidth="75.0" text="C1" />
+                                    <TableColumn prefWidth="75.0" text="C2" />
+                                 </columns>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <Label alignment="TOP_LEFT" prefHeight="27.0" style="-fx-background-color: #f4f4f4;" text="Monitória" textFill="#2e786f" textOverrun="CLIP" translateY="-15.0">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="20.0" />
+                           </StackPane.margin>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="-1.0" />
+                     </VBox.margin>
+                  </StackPane>
+                  <StackPane alignment="TOP_LEFT">
+                     <children>
+                        <VBox prefHeight="5.0" prefWidth="1156.0" style="-fx-border-color: #bfbfbfbf; -fx-background-radius: 10; -fx-border-width: 2; -fx-padding: 10;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <HBox prefHeight="20.0" prefWidth="1160.0">
+                                 <children>
+                                    <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Em Manutenção!">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Label alignment="TOP_LEFT" prefHeight="27.0" style="-fx-background-color: #f4f4f4;" text="Enfermagem" textFill="#2e786f" textOverrun="CLIP" translateY="-15.0">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="20.0" />
+                           </StackPane.margin>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="-1.0" />
+                     </VBox.margin>
+                  </StackPane>
+                  <StackPane alignment="TOP_LEFT">
+                     <children>
+                        <VBox prefHeight="2.0" prefWidth="1156.0" style="-fx-border-color: #bfbfbfbf; -fx-background-radius: 10; -fx-border-width: 2; -fx-padding: 10;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <HBox prefHeight="20.0" prefWidth="1160.0">
+                                 <children>
+                                    <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Em Manutenção!">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <StackPane.margin>
+                              <Insets top="-1.0" />
+                           </StackPane.margin>
+                        </VBox>
+                        <Label alignment="TOP_LEFT" prefHeight="27.0" style="-fx-background-color: #f4f4f4;" text="Farmácia" textFill="#2e786f" textOverrun="CLIP" translateY="-15.0">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="20.0" />
+                           </StackPane.margin>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="TOP_LEFT">
+                     <children>
+                        <VBox prefHeight="5.0" prefWidth="1156.0" style="-fx-border-color: #bfbfbfbf; -fx-background-radius: 10; -fx-border-width: 2; -fx-padding: 10;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <HBox prefHeight="20.0" prefWidth="1160.0">
+                                 <children>
+                                    <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Em Manutenção!">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Label alignment="TOP_LEFT" prefHeight="27.0" style="-fx-background-color: #f4f4f4;" text="Auditoria" textFill="#2e786f" textOverrun="CLIP" translateY="-15.0">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="20.0" />
+                           </StackPane.margin>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="-1.0" />
+                     </VBox.margin>
+                  </StackPane>
+                  <StackPane alignment="TOP_LEFT">
+                     <children>
+                        <VBox prefHeight="5.0" prefWidth="1156.0" style="-fx-border-color: #bfbfbfbf; -fx-background-radius: 10; -fx-border-width: 2; -fx-padding: 10;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <HBox prefHeight="20.0" prefWidth="1160.0">
+                                 <children>
+                                    <Label contentDisplay="CENTER" graphicTextGap="10.0" text="Em Manutenção!">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Label alignment="TOP_LEFT" prefHeight="27.0" style="-fx-background-color: #f4f4f4;" text="Financeiro" textFill="#2e786f" textOverrun="CLIP" translateY="-15.0">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets left="20.0" />
+                           </StackPane.margin>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="-1.0" />
+                     </VBox.margin>
+                  </StackPane>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
