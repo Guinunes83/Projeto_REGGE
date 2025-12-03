@@ -30,6 +30,7 @@
               <items>
                 <MenuItem mnemonicParsing="false" text="SAE's" />
                 <MenuItem mnemonicParsing="false" onAction="#onMenuDesvioProtocoloClicked" text="Desvio de Protocolo" />
+                        <MenuItem mnemonicParsing="false" onAction="#onMenuDesvioProtocoloClicked" text="EStoque Kits" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Enfermagem">
@@ -57,9 +58,9 @@
         <Menu mnemonicParsing="false" text="Cadastro">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosEstudosClicked" text="Estuddo" />
-            <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosMonitoresClicked" text="Monitor" />
+              <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosPIClicked" text="Kits" />
             <MenuItem mnemonicParsing="false" text="Membro" />
-              <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosPIClicked" text="PI" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosMonitoresClicked" text="Monitor" />
               <MenuItem mnemonicParsing="false" text="Paciente" />
               <MenuItem mnemonicParsing="false" text="Perfil de Usuário" />
           </items>
