@@ -6,22 +6,38 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        Parent root = loadFXML("primary");
+        scene = new Scene(root);
+        
+        try {
+            Image icone = new Image(getClass().getResourceAsStream("icone_grupo_elora.png"));
+            stage.getIcons().add(icone);
+        } catch (Exception e) {
+            System.out.println("Ícone não encontrado.");
+        }
+
+        stage.setTitle("Projeto REGGE - Sistema de Gestão");
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
     }
+
+    // --- ADICIONE ISTO ---
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        System.exit(0);
+    }
+    // ---------------------
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
@@ -35,5 +51,4 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }

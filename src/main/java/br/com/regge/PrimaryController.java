@@ -148,4 +148,37 @@ public class PrimaryController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void onMenuEstoqueKitsClicked(ActionEvent event) {
+        System.out.println("Clicou em Estoque Kits");
+
+        try {
+            Parent formEstoqueKits = FXMLLoader.load(getClass().getResource("EstoqueKits.fxml"));
+            Stage novaJanela = new Stage();
+            novaJanela.setTitle("Estoque Kits");
+
+            Scene cena = new Scene(formEstoqueKits);
+            novaJanela.setScene(cena);
+            novaJanela.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onMenuBlocoDeNotasClicked(ActionEvent event) {
+        try {
+            Parent formBloco = FXMLLoader.load(getClass().getResource("BlocoDeNotas.fxml"));
+            Stage novaJanela = new Stage();
+            novaJanela.setTitle("Bloco de Notas");
+
+            Scene cena = new Scene(formBloco);
+            novaJanela.setScene(cena);
+            novaJanela.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
