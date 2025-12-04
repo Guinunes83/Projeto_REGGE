@@ -7,4 +7,5 @@ br\com\regge\CadastroDadosMonitoresController.class
 br\com\regge\PrimaryController.class
 br\com\regge\CadastroDadosPIController.class
 br\com\regge\BlocoDeNotasController.class
+br\com\regge\EstoqueKitsController.class
 br\com\regge\CadastroDadosEstudosController.class
