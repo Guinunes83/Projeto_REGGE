@@ -7,13 +7,14 @@ import javafx.fxml.FXML; // Importa a classe do evento de clique
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
 public class PrimaryController {
 
     @FXML
-    private BorderPane borderPanePrincipal;
+    private TabPane tabPanePrincipal; // Certifique-se que o fx:id no FXML é igual!
 
     // 2. Método de exemplo que o Maven criou (podemos apagar depois)
     @FXML
@@ -28,20 +29,24 @@ public class PrimaryController {
     private void onMenuDesvioProtocoloClicked(ActionEvent event) {
         System.out.println("Clicou em 'Desvio de Protocolo'!");
         try {
-            // Carrega o FXML (que agora é o VBox raiz)
+            // 1. Carrega o conteúdo (igualzinho antes)
             Parent formDesvio = FXMLLoader.load(getClass().getResource("DesvioProtocolo.fxml"));
 
-            // Cria uma nova janela.
-            Stage novaJanela = new Stage();
-            novaJanela.setTitle("Desvio De Protocolo");
+            // 2. Cria uma nova Aba (Tab)
+            Tab novaAba = new Tab("Desvio de Protocolo");
 
-            // Cria a cena e coloca a janela
-            Scene cena = new Scene(formDesvio);
-            novaJanela.setScene(cena);
+            // 3. Define o conteúdo da aba como o seu formulário
+            novaAba.setContent(formDesvio);
 
-            novaJanela.show();
+            // 4. (Opcional) Faz a aba ser fechável ou não
+            novaAba.setClosable(true);
 
-            // Mostra a janela
+            // 5. Adiciona a aba no TabPane
+            tabPanePrincipal.getTabs().add(novaAba);
+
+            // 6. Foca na aba nova (seleciona ela)
+            tabPanePrincipal.getSelectionModel().select(novaAba);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

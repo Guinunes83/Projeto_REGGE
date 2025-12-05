@@ -1,92 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="borderPanePrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.regge.PrimaryController">
-  <top>
-    <MenuBar BorderPane.alignment="TOP_LEFT">
-      <menus>
-        <Menu mnemonicParsing="false" text="Arquivo">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Mudar de Usuário" />
-            <MenuItem mnemonicParsing="false" text="Sair" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Dados">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#onMenuDadosEstudosClicked" text="Dados Estudos" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Setor">
-          <items>
-            <Menu mnemonicParsing="false" text="Coorenação">
-              <items>
-                <MenuItem mnemonicParsing="false" text="SAE's" />
-                <MenuItem mnemonicParsing="false" onAction="#onMenuDesvioProtocoloClicked" text="Desvio de Protocolo" />
-                        <MenuItem mnemonicParsing="false" onAction="#onMenuEstoqueKitsClicked" text="EStoque Kits" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Enfermagem">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Ensino">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Financeiro">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Regulatório">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#onMenuReuniaoCEPClicked" text="Reunião CEP" />
-              </items>
-            </Menu>
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Cadastro">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosEstudosClicked" text="Estuddo" />
-              <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosPIClicked" text="Kits" />
-            <MenuItem mnemonicParsing="false" text="Membro" />
-            <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosMonitoresClicked" text="Monitor" />
-              <MenuItem mnemonicParsing="false" text="Paciente" />
-              <MenuItem mnemonicParsing="false" text="Perfil de Usuário" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Ferramentas">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Agenda Google" />
-            <MenuItem mnemonicParsing="false" text="Agenda Monitoria" />
-            <MenuItem mnemonicParsing="false" onAction="#onMenuBlocoDeNotasClicked" text="Bloco de Notas" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-  </top>
-  <center>
-    <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-      <children>
-        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="@elora_assinatura_verde.jpg" />
-          </image>
-        </ImageView>
-      </children>
-      <BorderPane.margin>
-        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-      </BorderPane.margin>
-    </StackPane>
-  </center>
+   <center>
+      <TabPane fx:id="tabPanePrincipal" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Inicio">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <left>
+      <Accordion BorderPane.alignment="CENTER">
+        <panes>
+          <TitledPane animated="false" text="Coordenação">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="203.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Regulatório">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Estudos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+   </left>
 </BorderPane>
