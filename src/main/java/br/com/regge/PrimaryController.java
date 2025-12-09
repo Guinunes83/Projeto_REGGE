@@ -26,29 +26,31 @@ public class PrimaryController {
      * *@param event
      */
     @FXML
-    private void onMenuDesvioProtocoloClicked(ActionEvent event) {
-        System.out.println("Clicou em 'Desvio de Protocolo'!");
+    void onMenuDesvioProtocoloClicked(ActionEvent event) {
+        System.out.println("1. O botão foi clicado!");
+
+        if (tabPanePrincipal == null) {
+            System.out.println("ERRO FATAL: tabPanePrincipal está NULO! Verifique o fx:id no Scene Builder.");
+            return; // Para tudo aqui
+        }
+        System.out.println("2. TabPane encontrado com sucesso.");
+
         try {
-            // 1. Carrega o conteúdo (igualzinho antes)
+            System.out.println("3. Tentando carregar o arquivo FXML...");
             Parent formDesvio = FXMLLoader.load(getClass().getResource("DesvioProtocolo.fxml"));
+            System.out.println("4. Arquivo FXML carregado!");
 
-            // 2. Cria uma nova Aba (Tab)
             Tab novaAba = new Tab("Desvio de Protocolo");
-
-            // 3. Define o conteúdo da aba como o seu formulário
             novaAba.setContent(formDesvio);
-
-            // 4. (Opcional) Faz a aba ser fechável ou não
             novaAba.setClosable(true);
 
-            // 5. Adiciona a aba no TabPane
             tabPanePrincipal.getTabs().add(novaAba);
-
-            // 6. Foca na aba nova (seleciona ela)
             tabPanePrincipal.getSelectionModel().select(novaAba);
+            System.out.println("5. Aba adicionada com sucesso!");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("ERRO AO CARREGAR ARQUIVO: " + e.getMessage());
+            e.printStackTrace(); // Mostra o erro detalhado vermelho
         }
     }
 

@@ -29,27 +29,31 @@ public class CadastroDadosEstudosController {
     @FXML
     private TextField tfPatologia;
 
+    // Dica: Adicionei <String> nos ComboBox para evitar avisos amarelos (warnings)
     @FXML
-    private ComboBox cbTipoEstudo;
+    private ComboBox<String> cbTipoEstudo;
 
     @FXML
-    private ComboBox cbViaMedicamento;
+    private ComboBox<String> cbViaMedicamento;
 
     @FXML
-    private ComboBox cbStatusRecrutamento;
+    private ComboBox<String> cbStatusRecrutamento;
 
     @FXML
-    private ComboBox tfNCentro;
+    private ComboBox<String> tfNCentro;
 
     // --- Método do Botão ---
     @FXML
     void onBtnCadastrarClicked(ActionEvent event) {
-        // 1. Ler o que o usuário digitou
-        String protocolo = tfProtocolo.getText();
-        String pi = tfPI.getText();
-        String patrocinador = tfPatrocinador.getText();
-        String pagador = tfPagador.getText();
-        String coordenador = tfCoordenador.getText();
+        // 1. Ler o que o usuário digitou (Usando os nomes CORRETOS das variáveis acima)
+        
+        // Cuidado: tfProtocoloEstudo pode ser nulo se não tiver fx:id no FXML, 
+        // mas assumindo que está ligado, vamos pegar o texto.
+        String protocolo = (tfProtocoloEstudo != null) ? tfProtocoloEstudo.getText() : "";
+        String pi = (tfnomePi != null) ? tfnomePi.getText() : "";
+        String patrocinador = (tfPatrocinador != null) ? tfPatrocinador.getText() : "";
+        String pagador = (tfCroPagador != null) ? tfCroPagador.getText() : "";
+        String coordenador = (tfNomeCoordenador != null) ? tfNomeCoordenador.getText() : "";
 
         // 2. Imprimir no terminal para testar
         System.out.println("=== Novo Estudo Cadastrado ===");
