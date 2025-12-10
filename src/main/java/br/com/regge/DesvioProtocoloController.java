@@ -4,13 +4,12 @@ import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class DesvioProtocoloController {
-
-    // --- Seus Campos (IDs exatos) ---
 
     @FXML
     private TextField estudosDesvioP;
@@ -21,8 +20,11 @@ public class DesvioProtocoloController {
     @FXML
     private TextField nCentroDesvioP;
 
+    // --- CORREÇÃO AQUI ---
+    // O erro dizia que no FXML isso é um ComboBox, então mudamos aqui para combinar
     @FXML
-    private TextField nomePacienteDesvioP;
+    private ComboBox<String> nomePacienteDesvioP; 
+    // ---------------------
 
     @FXML
     private TextField nPacienteDesvioP;
@@ -36,20 +38,26 @@ public class DesvioProtocoloController {
     @FXML
     private TextArea descricaoDesvioP;
 
-    // --- Ação do Botão ---
-    // Certifique-se que no Scene Builder o "On Action" do botão é: onBtnCadastrarDesvioP
     @FXML
     void onBtnCadastrarDesvioP(ActionEvent event) {
         
-        // 1. Ler os dados (Get Text)
         String estudo = estudosDesvioP.getText();
         String pi = piDesvioP.getText();
         String centro = nCentroDesvioP.getText();
-        String paciente = nomePacienteDesvioP.getText();
         String nPaciente = nPacienteDesvioP.getText();
         String descricao = descricaoDesvioP.getText();
 
-        // 2. Ler as Datas (com proteção para não dar erro se estiver vazio)
+        // --- CORREÇÃO NA LEITURA ---
+        // ComboBox não usa getText(), usa getValue()
+        String paciente = "";
+        if (nomePacienteDesvioP.getValue() != null) {
+            paciente = nomePacienteDesvioP.getValue();
+        } else {
+            // Se for um ComboBox editável onde se pode digitar, usamos getEditor().getText()
+            // Mas vamos tentar getValue() primeiro
+            paciente = "Não selecionado"; 
+        }
+
         String dataOcorrencia = "";
         if (dataOcorrenciaDesvioP.getValue() != null) {
             dataOcorrencia = dataOcorrenciaDesvioP.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -60,7 +68,6 @@ public class DesvioProtocoloController {
             dataDesvio = dataDesvioP.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
 
-        // 3. Imprimir no Console (Teste)
         System.out.println("===================================");
         System.out.println("NOVO DESVIO CADASTRADO COM SUCESSO");
         System.out.println("===================================");
@@ -72,5 +79,13 @@ public class DesvioProtocoloController {
         System.out.println("Data Desvio: " + dataDesvio);
         System.out.println("Descrição: " + descricao);
         System.out.println("===================================");
+    }
+    
+    @FXML
+    public void initialize() {
+        // Se quiser adicionar pacientes de teste para o ComboBox funcionar:
+        if (nomePacienteDesvioP != null) {
+            nomePacienteDesvioP.getItems().addAll("Paciente 01", "Paciente 02", "Paciente 03");
+        }
     }
 }

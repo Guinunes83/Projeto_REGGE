@@ -1,57 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 
 <BorderPane fx:id="borderPanePrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.regge.PrimaryController">
    <center>
-      <TabPane fx:id="tabPanePrincipal" prefHeight="400.0" prefWidth="428.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Inicio">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="300.0" />
-            </content>
-          </Tab>
-          <Tab text="Untitled Tab 2">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@elora_assinatura_tagline_vert_verde.png" />
+               </image>
+            </ImageView>
+         </children>
+      </StackPane>
    </center>
-   <left>
-      <Accordion BorderPane.alignment="CENTER">
-        <panes>
-          <TitledPane animated="false" text="Coordenação">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <VBox layoutY="20.0" prefHeight="304.0" prefWidth="200.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
-                           <children>
-                              <Hyperlink maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onMenuDesvioProtocoloClicked" prefHeight="23.0" prefWidth="204.0" text="Desvio de Protocolo" />
-                           </children></VBox>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
-          <TitledPane animated="false" text="Regulatório">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </TitledPane>
-          <TitledPane animated="false" text="Estudos">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </TitledPane>
-        </panes>
-      </Accordion>
-   </left>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Inicio">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Mudar Perfil..." />
+              <MenuItem mnemonicParsing="false" text="Logout" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Sair" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Setores">
+            <items>
+                  <Menu mnemonicParsing="false" text="Coordenação">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#onMenuDesvioProtocoloClicked" text="Desvio de Protocolo" />
+                      <MenuItem mnemonicParsing="false" text="Desvio de GCP" />
+                        <MenuItem mnemonicParsing="false" text="Desvio de SAE" />
+                        <MenuItem mnemonicParsing="false" text="Estoque Kit's" />
+                    </items>
+                  </Menu>
+              <MenuItem mnemonicParsing="false" text="Administrativo" />
+                  <MenuItem mnemonicParsing="false" text="Auditoria" />
+                  <MenuItem mnemonicParsing="false" text="Enfermagem" />
+                  <MenuItem mnemonicParsing="false" text="Ensino" />
+                  <MenuItem mnemonicParsing="false" text="Farmácia" />
+                  <MenuItem mnemonicParsing="false" text="Financeiro" />
+                  <Menu mnemonicParsing="false" text="Regulatório">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#onMenuReuniaoCEPClicked" text="Reunião CEP" />
+                        <MenuItem mnemonicParsing="false" onAction="#onMenuDadosEstudosClicked" text="Dados Estudos" />
+                    </items>
+                  </Menu>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Cadastrar">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosEstudosClicked" text="Cadastro Estudos" />
+                  <MenuItem mnemonicParsing="false" text="Cadastro Monitores" />
+                  <MenuItem mnemonicParsing="false" text="Cadastro Participantes" />
+                  <MenuItem mnemonicParsing="false" text="Cadastro Membros" />
+                  <MenuItem mnemonicParsing="false" onAction="#onMenuEstoqueKitsClicked" text="Cadastro Kit's" />
+                  <MenuItem mnemonicParsing="false" text="Cadastro Perfis" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Relatórios">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ferramentas">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Agenda Monitoria" />
+                  <MenuItem mnemonicParsing="false" text="Agenda Google" />
+                  <MenuItem mnemonicParsing="false" onAction="#onMenuBlocoDeNotasClicked" text="Bloco de Notas" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
 </BorderPane>

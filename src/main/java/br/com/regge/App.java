@@ -15,9 +15,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        BancoDeDadosFake.inicializarDados();
         Parent root = loadFXML("primary");
         scene = new Scene(root);
-        
+
         try {
             Image icone = new Image(getClass().getResourceAsStream("icone_grupo_elora.png"));
             stage.getIcons().add(icone);
@@ -27,7 +28,13 @@ public class App extends Application {
 
         stage.setTitle("Projeto REGGE - Sistema de Gestão");
         stage.setScene(scene);
-        stage.setMaximized(true);
+
+        // --- MUDANÇA AQUI: Tamanho Fixo e Centralizado ---
+        stage.setWidth(900); // Largura
+        stage.setHeight(600); // Altura
+        stage.centerOnScreen(); // Centraliza no monitor
+        // -------------------------------------------------
+
         stage.show();
     }
 
