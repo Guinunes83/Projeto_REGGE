@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.regge.ReuniaoCEPController">
+    <children>
+      <StackPane prefHeight="118.0" prefWidth="1380.0">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+         </VBox.margin>
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Reunião CEP" textFill="#2d786f">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <VBox prefHeight="115.0" prefWidth="1380.0" style="-fx-border-color: #bfbfbf; -fx-border-width: 2; -fx-background-radius: 10; -fx-padding: 15;">
+                     <children>
+                        <Label style="-fx-background-color: #f4f4f4;" text="Cadastrar Emenda" textAlignment="CENTER" textFill="#2d786f" translateY="-30.0">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="1255.0" translateY="-20.0">
+                           <children>
+                              <VBox prefHeight="45.0" prefWidth="112.0">
+                                 <children>
+                                    <Label text="Data Reunião">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="dataReuniao" prefHeight="25.0" prefWidth="130.0" promptText="01/12/2025" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="45.0" prefWidth="153.0">
+                                 <children>
+                                    <Label text="Estudo">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="estudoReuniao" prefHeight="25.0" prefWidth="161.0" promptText="Capitello-281" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="45.0" prefWidth="179.0">
+                                 <children>
+                                    <Label text="PI">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="piReuniao" maxWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="PI" text="Marcelo Freitas" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="45.0" prefWidth="151.0">
+                                 <children>
+                                    <Label text="C.A.A.E.">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="caaeReuniao" prefHeight="25.0" prefWidth="133.0" promptText="C.A.A.E." text="49115415.7.2038.5355        " />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="45.0" prefWidth="138.0">
+                                 <children>
+                                    <Label text="Tipo Emenda">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="tipoEmendaReuniao" prefHeight="25.0" prefWidth="152.0" promptText="Emenda" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="45.0" prefWidth="70.0">
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="84.0" text="Linha PB">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="linhaPbReuniao" prefHeight="25.0" prefWidth="43.0" promptText="Linha" text="Np5" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="45.0" prefWidth="138.0">
+                                 <children>
+                                    <Label text="Situação CEP">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="situacaoCepReuniao" prefHeight="25.0" prefWidth="205.0" promptText="Situação CEP" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="45.0" prefWidth="122.0">
+                                 <children>
+                                    <Label text="Data Aprovação">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="dataAprovacaoReuniao" prefHeight="25.0" prefWidth="130.0" promptText="01/12/2025" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="45.0" prefWidth="52.0">
+                                 <children>
+                                    <Label prefHeight="7.0" prefWidth="74.0" text="Tempo" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tempoReuniao" alignment="CENTER_RIGHT" maxWidth="-Infinity" prefHeight="23.0" prefWidth="79.0" promptText="PI" text="14" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="BOTTOM_CENTER">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <children>
+                                          <Label prefHeight="17.0" prefWidth="36.0" text="Dias">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox prefHeight="45.0" prefWidth="138.0">
+                                 <children>
+                                    <Label text="Treinamento">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="treinamentoReuniao" prefHeight="25.0" prefWidth="205.0" promptText="Treinamento" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="TOP_RIGHT" prefHeight="77.0" prefWidth="1000.0">
+                           <children>
+                                    <Button fx:id="btnCadastrarReuniao" alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cadastrar" textAlignment="RIGHT">
+                                        <font>
+                                            <Font name="System Bold" size="12.0" />
+                                        </font>
+                                    </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+
+        <TableView minWidth="1000.0" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colDataReuniao" prefWidth="112.0" text="Data Reunião" />
+                <TableColumn fx:id="colEstudoReuniao" prefWidth="173.0" text="Estudo" />
+            <TableColumn fx:id="colPiReuniao" prefWidth="243.0" text="PI" />
+            <TableColumn fx:id="colCaaeReuniao" prefWidth="227.0" text="C.A.A.E." />
+            <TableColumn fx:id="colTipoEmenReuniao" prefWidth="131.0" text="Tipo Emenda" />
+            <TableColumn fx:id="collinhaPbReuniao" prefWidth="57.0" text="Linha PB" />
+            <TableColumn fx:id="colSituacaoCepReuniao" prefWidth="164.0" text="Situação CEP" />
+            <TableColumn fx:id="colDataAprovReuniao" prefWidth="104.0" text="Data Aprovação" />
+            <TableColumn fx:id="colTempoReuniao" prefWidth="51.0" text="Tempo" />
+            <TableColumn fx:id="colTreinamentoReuniao" prefWidth="117.0" text="Treinamento" />
+            </columns>
+            <placeholder>
+                <Label text="Não há conteúdo na tabela" />
+            </placeholder>
+            <VBox.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" />
+            </VBox.margin>
+        </TableView>
+    </children>
+</VBox>

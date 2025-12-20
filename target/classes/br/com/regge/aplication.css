@@ -1,0 +1,29 @@
+/* Fundo do papel (amarelo claro tipo bloco de notas) */
+.papel-fundo {
+    -fx-background-color: #eeeeee; 
+}
+
+/* Remove a borda do ScrollPane para ficar limpo */
+.scroll-papel {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+.scroll-papel .viewport {
+    -fx-background-color: transparent;
+}
+
+/* O estilo da LINHA (Pauta) */
+.linha-pauta {
+    /* Borda apenas embaixo (azul claro) */
+    -fx-border-color: transparent transparent #aaddff transparent;
+    -fx-border-width: 1;
+}
+
+/* O estilo do texto digitado (sem caixa em volta) */
+.texto-manuscrito {
+    -fx-background-color: transparent; /* Fundo transparente */
+    -fx-background-insets: 0;
+    -fx-font-family: "Segoe Print", "Comic Sans MS", sans-serif; /* Fonte estilo mão */
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333;
+}
