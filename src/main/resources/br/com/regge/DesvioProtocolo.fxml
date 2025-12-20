@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -84,7 +83,7 @@
                                     </TextArea>
                                     <VBox alignment="TOP_RIGHT">
                                        <children>
-                                          <Button fx:id="btnCadastrarDesvioP" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cadastrar">
+                                          <Button fx:id="btnCadastrarDesvioP" mnemonicParsing="false" onAction="#onBtnCadastrarDesvioP" prefHeight="25.0" prefWidth="94.0" text="Cadastrar">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -104,18 +103,18 @@
                      </children>
                   </StackPane>
             
-                              <TableView minWidth="1000.0" prefHeight="370.0" prefWidth="1261.0" VBox.vgrow="ALWAYS">
+                              <TableView fx:id="tabListaDesvioP" minWidth="1000.0" prefHeight="370.0" prefWidth="1261.0" VBox.vgrow="ALWAYS">
                      <columns>
-                        <TableColumn prefWidth="66.0" text="Selecionar" />
-                        <TableColumn prefWidth="164.0" text="Estudo" />
-                        <TableColumn prefWidth="153.0" text="PI" />
-                        <TableColumn prefWidth="84.0" text="N° do Centro" />
-                        <TableColumn prefWidth="187.0" text="Nome do Paciente" />
-                        <TableColumn prefWidth="95.0" text="N° do Paciente" />
-                        <TableColumn prefWidth="154.0" text="Data Ocorrência" />
-                        <TableColumn minWidth="114.0" prefWidth="132.0" text="Data do Desvio" />
-                        <TableColumn minWidth="101.0" prefWidth="101.0" text="Status" />
-                        <TableColumn maxWidth="245.0" minWidth="123.0" prefWidth="123.0" resizable="false" text="Data da Geração" />
+                        <TableColumn fx:id="colSelecionar" prefWidth="66.0" text="Selecionar" />
+                        <TableColumn fx:id="colEstudo" prefWidth="164.0" text="Estudo" />
+                        <TableColumn fx:id="colInvestigador" prefWidth="153.0" text="PI" />
+                        <TableColumn fx:id="colCentro" prefWidth="84.0" text="N° do Centro" />
+                        <TableColumn fx:id="colNomePaciente" prefWidth="187.0" text="Nome do Paciente" />
+                        <TableColumn fx:id="colNumPaciente" prefWidth="95.0" text="N° do Paciente" />
+                        <TableColumn fx:id="colDataOcorrencia" prefWidth="154.0" text="Data Ocorrência" />
+                        <TableColumn fx:id="colDataDesvio" minWidth="114.0" prefWidth="132.0" text="Data do Desvio" />
+                        <TableColumn fx:id="colStatus" minWidth="101.0" prefWidth="101.0" text="Status" />
+                        <TableColumn fx:id="colDataGeracao" maxWidth="245.0" minWidth="123.0" prefWidth="123.0" resizable="false" text="Data da Geração" />
                      </columns>
                      <placeholder>
                         <Label text="Não há conteúdo na tabela" />
@@ -141,26 +140,19 @@
                               </Label>
                               <HBox>
                                  <children>
-                                    <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="164.0" text="Investigador Principal">
+                                    <RadioButton fx:id="rbInvestigadorPrincipal" mnemonicParsing="false" prefHeight="17.0" prefWidth="164.0" text="Investigador Principal">
                                        <padding>
                                           <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                        </padding>
                                     </RadioButton>
-                                    <RadioButton mnemonicParsing="false" text="Sub-Investigador">
+                                    <RadioButton fx:id="rbSubInvestigador" mnemonicParsing="false" text="Sub-Investigador">
                                        <padding>
                                           <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                        </padding>
                                     </RadioButton>
                                  </children>
                               </HBox>
-                              <ChoiceBox minHeight="25.0" prefHeight="0.0" prefWidth="340.0">
-                                 <VBox.margin>
-                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                                 </padding>
-                              </ChoiceBox>
+                              <ComboBox fx:id="cmbPesquisadorResponsavel" prefHeight="25.0" prefWidth="280.0" />
                            </children>
                         </VBox>
                         <VBox alignment="BOTTOM_LEFT" prefHeight="142.0" prefWidth="492.0">
@@ -173,16 +165,12 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox minHeight="25.0" prefHeight="0.0" prefWidth="340.0">
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" />
-                                 </VBox.margin>
-                              </ChoiceBox>
+                              <ComboBox fx:id="cmbCoordenador" prefHeight="25.0" prefWidth="280.0" />
                            </children>
                         </VBox>
                         <VBox alignment="BOTTOM_CENTER" prefHeight="74.0" prefWidth="145.0">
                            <children>
-                              <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#gerarRelatorioPDF" prefHeight="32.0" prefWidth="135.0" text="Gerar Desvio" />
+                              <Button fx:id="btnGerarDesvioP" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBtnGerarDesvioP" prefHeight="32.0" prefWidth="135.0" text="Gerar Desvio" />
                            </children>
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

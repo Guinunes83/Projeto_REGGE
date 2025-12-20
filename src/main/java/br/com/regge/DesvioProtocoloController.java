@@ -1,7 +1,8 @@
 package br.com.regge;
 
-// --- Imports do Java Básico ---
+// --- Imports Básicos ---
 import java.io.FileOutputStream;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.itextpdf.text.BaseColor;
@@ -16,86 +17,333 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class DesvioProtocoloController {
 
+    // --- Campos do Formulário ---
     @FXML
-    private ComboBox<String> estudosDesvioP; 
-
+    private ComboBox<String> estudosDesvioP;
     @FXML
-    private TextField piDesvioP;
-
+    private TextField piDesvioP; // Pode ser invisível ou removido se não usar mais
     @FXML
     private TextField nCentroDesvioP;
-
     @FXML
-    private ComboBox<String> nomePacienteDesvioP;
-
+    private ComboBox<Participante> nomePacienteDesvioP;
     @FXML
     private TextField nPacienteDesvioP;
-
     @FXML
     private DatePicker dataOcorrenciaDesvioP;
-
     @FXML
     private DatePicker dataDesvioP;
-
     @FXML
     private TextArea descricaoDesvioP;
 
     @FXML
+    private RadioButton rbInvestigadorPrincipal;
+    @FXML
+    private RadioButton rbSubInvestigador;
+    @FXML
+    private ComboBox<String> cmbPesquisadorResponsavel;
+    @FXML
+    private ComboBox<Membro> cmbCoordenador;
+
+    // --- Tabela e Colunas (Ids devem ser iguais no Scene Builder) ---
+    @FXML
+    private TableView<DesvioRegistro> tabListaDesvioP;
+    @FXML
+    private TableColumn<DesvioRegistro, Object> colSelecionar;
+    @FXML
+    private TableColumn<DesvioRegistro, String> colEstudo;
+    @FXML
+    private TableColumn<DesvioRegistro, String> colInvestigador;
+    @FXML
+    private TableColumn<DesvioRegistro, String> colCentro;
+    @FXML
+    private TableColumn<DesvioRegistro, String> colNomePaciente;
+    @FXML
+    private TableColumn<DesvioRegistro, String> colNumPaciente;
+    @FXML
+    private TableColumn<DesvioRegistro, String> colDataOcorrencia;
+    @FXML
+    private TableColumn<DesvioRegistro, String> colDataDesvio;
+    @FXML
+    private TableColumn<DesvioRegistro, String> colStatus;
+    @FXML
+    private TableColumn<DesvioRegistro, String> colDataGeracao;
+
+    private ToggleGroup grupoInvestigador;
+    private ObservableList<DesvioRegistro> listaDesvios = FXCollections.observableArrayList();
+
+    @FXML
     public void initialize() {
+        System.out.println(">>> INICIANDO TELA DE DESVIO <<<");
+
+        // Configura RadioButtons
+        grupoInvestigador = new ToggleGroup();
+        if (rbInvestigadorPrincipal != null && rbSubInvestigador != null) {
+            rbInvestigadorPrincipal.setToggleGroup(grupoInvestigador);
+            rbSubInvestigador.setToggleGroup(grupoInvestigador);
+
+            rbInvestigadorPrincipal.setOnAction(e -> atualizarComboPesquisador(true));
+            rbSubInvestigador.setOnAction(e -> atualizarComboPesquisador(false));
+
+            // Define um padrão para não começar vazio
+            rbInvestigadorPrincipal.setSelected(true);
+        } else {
+            System.err.println("ERRO: RadioButtons não encontrados! Verifique os fx:id no SceneBuilder.");
+        }
+
+        // Configura Tabela
+        configurarTabela();
+
+        // Carregar Estudos
         if (estudosDesvioP != null) {
             for (Estudo estudo : BancoDeDadosFake.getEstudos()) {
                 estudosDesvioP.getItems().add(estudo.getNome());
             }
+            estudosDesvioP.setOnAction(event -> aoSelecionarEstudo());
         }
+
+        // Carregar Coordenadores
+        if (cmbCoordenador != null) {
+            for (Membro m : BancoDeDadosMembros.getMembros()) {
+                if (m.getFuncao().toLowerCase().contains("coordenador")) {
+                    cmbCoordenador.getItems().add(m);
+                }
+            }
+        } else {
+            System.err.println("ERRO: Combo Coordenador não encontrado! Verifique fx:id=cmbCoordenador");
+        }
+
+        // Listener Paciente
         if (nomePacienteDesvioP != null) {
-            nomePacienteDesvioP.getItems().addAll("Paciente 01", "Paciente 02", "Paciente 03");
+            nomePacienteDesvioP.setOnAction(event -> {
+                Participante p = nomePacienteDesvioP.getValue();
+                if (p != null && nPacienteDesvioP != null) {
+                    nPacienteDesvioP.setText(p.getNumero());
+                }
+            });
         }
     }
 
-    @FXML
-    void onBtnCadastrarDesvioP(ActionEvent event) {
-        System.out.println("Botão Cadastrar clicado");
+    private void configurarRadioButtons() {
+        grupoInvestigador = new ToggleGroup();
+        if (rbInvestigadorPrincipal != null && rbSubInvestigador != null) {
+            rbInvestigadorPrincipal.setToggleGroup(grupoInvestigador);
+            rbSubInvestigador.setToggleGroup(grupoInvestigador);
+
+            // Lógica solicitada:
+            rbInvestigadorPrincipal.setOnAction(e -> atualizarComboPesquisador(true));
+            rbSubInvestigador.setOnAction(e -> atualizarComboPesquisador(false));
+        }
     }
 
-    @FXML
-    void gerarRelatorioPDF(ActionEvent event) {
-        System.out.println(">>> GERANDO PDF PAISAGEM COM LOGO NOVA... <<<");
+    private void configurarTabela() {
+        // Dizendo para as colunas qual campo da classe DesvioRegistro elas devem olhar
+        colSelecionar.setCellValueFactory(new PropertyValueFactory<>("selecionar"));
+        colEstudo.setCellValueFactory(new PropertyValueFactory<>("estudo"));
+        colInvestigador.setCellValueFactory(new PropertyValueFactory<>("investigador"));
+        colCentro.setCellValueFactory(new PropertyValueFactory<>("centro"));
+        colNomePaciente.setCellValueFactory(new PropertyValueFactory<>("nomePaciente"));
+        colNumPaciente.setCellValueFactory(new PropertyValueFactory<>("numPaciente"));
+        colDataOcorrencia.setCellValueFactory(new PropertyValueFactory<>("dataOcorrencia"));
+        colDataDesvio.setCellValueFactory(new PropertyValueFactory<>("dataDesvio"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colDataGeracao.setCellValueFactory(new PropertyValueFactory<>("dataGeracao"));
 
-        // --- 1. CAPTURA DE DADOS ---
-        String valEstudo = (estudosDesvioP.getValue() != null) ? estudosDesvioP.getValue() : "";
-        String valPatrocinador = "";
-        for(Estudo e : BancoDeDadosFake.getEstudos()){
-            if(e.getNome().equals(valEstudo)) {
-                valPatrocinador = e.getMembro();
+        tabListaDesvioP.setItems(listaDesvios);
+    }
+
+    private void carregarDadosIniciais() {
+        if (estudosDesvioP != null) {
+            for (Estudo estudo : BancoDeDadosFake.getEstudos()) {
+                estudosDesvioP.getItems().add(estudo.getNome());
+            }
+            estudosDesvioP.setOnAction(event -> aoSelecionarEstudo());
+        }
+
+        if (nomePacienteDesvioP != null) {
+            nomePacienteDesvioP.setOnAction(event -> {
+                Participante p = nomePacienteDesvioP.getValue();
+                if (p != null) {
+                    nPacienteDesvioP.setText(p.getNumero());
+                }
+            });
+        }
+
+        if (cmbCoordenador != null) {
+            for (Membro m : BancoDeDadosMembros.getMembros()) {
+                if (m.getFuncao().toLowerCase().contains("coordenador")) {
+                    cmbCoordenador.getItems().add(m);
+                }
+            }
+        }
+    }
+
+    // --- LÓGICA DO RADIO BUTTON ---
+    private void atualizarComboPesquisador(boolean isPrincipal) {
+        if (cmbPesquisadorResponsavel == null) {
+            return;
+        }
+        cmbPesquisadorResponsavel.getItems().clear();
+
+        if (isPrincipal) {
+            // Se for Principal, pega SÓ o PI do estudo selecionado
+            String nomeEstudo = estudosDesvioP.getValue();
+            if (nomeEstudo != null) {
+                for (Estudo e : BancoDeDadosFake.getEstudos()) {
+                    if (e.getNome().equals(nomeEstudo)) {
+                        cmbPesquisadorResponsavel.getItems().add(e.getPi());
+                        cmbPesquisadorResponsavel.getSelectionModel().selectFirst();
+                        break;
+                    }
+                }
+            }
+        } else {
+            // Se for Sub-Investigador, lista TODOS os membros
+            for (Membro m : BancoDeDadosMembros.getMembros()) {
+                cmbPesquisadorResponsavel.getItems().add(m.getNome());
+            }
+        }
+    }
+
+    private void aoSelecionarEstudo() {
+        String nomeEstudo = estudosDesvioP.getValue();
+        if (nomeEstudo == null) {
+            return;
+        }
+
+        Estudo estudoSelecionado = null;
+        for (Estudo e : BancoDeDadosFake.getEstudos()) {
+            if (e.getNome().equals(nomeEstudo)) {
+                estudoSelecionado = e;
                 break;
             }
         }
-        String valInvestigador = piDesvioP.getText();
-        String valTipo = "Desvio"; 
-        String valPaciente = nPacienteDesvioP.getText();
-        String valDescricao = descricaoDesvioP.getText();
-        String valAcao = "Reorientação do Paciente"; 
-        
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String valDataMonitoria = (dataDesvioP.getValue() != null) ? dataDesvioP.getValue().format(fmt) : "";
-        String valDataAtual = java.time.LocalDate.now().format(fmt);
 
-        Document documento = new Document(PageSize.A4.rotate()); 
+        if (estudoSelecionado != null) {
+            if (nCentroDesvioP != null) {
+                nCentroDesvioP.setText(estudoSelecionado.getNumeroCentro());
+            }
+            if (piDesvioP != null) {
+                piDesvioP.setText(estudoSelecionado.getPi());
+            }
+        }
+
+        if (nomePacienteDesvioP != null) {
+            nomePacienteDesvioP.getItems().clear();
+            nPacienteDesvioP.setText("");
+            for (Participante p : BancoDeDadosParticipantes.getParticipantes()) {
+                if (p.getEstudo().equals(nomeEstudo)) {
+                    nomePacienteDesvioP.getItems().add(p);
+                }
+            }
+        }
+
+        // Atualiza o combo de pesquisador caso já esteja marcado "Investigador Principal"
+        if (rbInvestigadorPrincipal.isSelected()) {
+            atualizarComboPesquisador(true);
+        }
+    }
+
+    // --- BOTÃO CADASTRAR (ADICIONAR NA TABELA) ---
+    @FXML
+    void onBtnCadastrarDesvioP(ActionEvent event) {
+        System.out.println(">>> CLIQUE NO BOTÃO CADASTRAR <<<");
 
         try {
-            PdfWriter.getInstance(documento, new FileOutputStream("Relatorio_Desvio_Completo.pdf"));
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            String estudo = (estudosDesvioP.getValue() != null) ? estudosDesvioP.getValue() : "-";
+            String investigador = (cmbPesquisadorResponsavel.getValue() != null) ? cmbPesquisadorResponsavel.getValue() : "-";
+            String centro = nCentroDesvioP.getText();
+            String nomePac = (nomePacienteDesvioP.getValue() != null) ? nomePacienteDesvioP.getValue().getNome() : "";
+            String numPac = nPacienteDesvioP.getText();
+
+            // Tratamento de datas vazias para não dar erro
+            String dtOcorrencia = (dataOcorrenciaDesvioP.getValue() != null) ? dataOcorrenciaDesvioP.getValue().format(fmt) : "-";
+            String dtDesvio = (dataDesvioP.getValue() != null) ? dataDesvioP.getValue().format(fmt) : "-";
+
+            String descricao = descricaoDesvioP.getText();
+            String coordenador = (cmbCoordenador.getValue() != null) ? cmbCoordenador.getValue().getNome() : "";
+
+            // Busca Patrocinador
+            String patrocinador = "";
+            for (Estudo e : BancoDeDadosFake.getEstudos()) {
+                if (e.getNome().equals(estudo)) {
+                    patrocinador = e.getPatrocinador();
+                    break;
+                }
+            }
+
+            DesvioRegistro registro = new DesvioRegistro(estudo, investigador, centro, nomePac, numPac,
+                    dtOcorrencia, dtDesvio, descricao, patrocinador, coordenador);
+
+            listaDesvios.add(registro);
+            tabListaDesvioP.refresh(); // Força a atualização visual
+
+            System.out.println("SUCESSO: Registro adicionado! Total na lista: " + listaDesvios.size());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("ERRO AO CADASTRAR: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void onBtnGerarDesvioP(ActionEvent event) {
+        System.out.println("Verificando itens selecionados para PDF...");
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String dataHoraAtual = LocalDate.now().atTime(java.time.LocalTime.now()).format(fmt);
+
+        boolean gerouAlgum = false;
+
+        // Varre a tabela procurando checkboxes marcados
+        for (DesvioRegistro registro : listaDesvios) {
+            if (registro.getSelecionar().isSelected()) {
+                // Gera o PDF para este registro
+                gerarPDFIndividual(registro);
+
+                // Atualiza a tabela
+                registro.setStatus("Gerado");
+                registro.setDataGeracao(dataHoraAtual);
+                gerouAlgum = true;
+            }
+        }
+
+        if (gerouAlgum) {
+            tabListaDesvioP.refresh(); // Atualiza visualmente a tabela
+            System.out.println("Processo concluído.");
+        } else {
+            System.out.println("Nenhum item selecionado na tabela.");
+        }
+    }
+
+    // Método que gera o PDF usando os dados do OBJETO da tabela, e não da tela
+    private void gerarPDFIndividual(DesvioRegistro dados) {
+        try {
+            // Nome do arquivo único para não sobreescrever (usa nome do paciente)
+            String nomeArquivo = "Desvio_" + dados.getNomePaciente().replace(" ", "_") + ".pdf";
+
+            Document documento = new Document(PageSize.A4.rotate());
+            PdfWriter.getInstance(documento, new FileOutputStream(nomeArquivo));
             documento.open();
 
-            // --- 2. CABEÇALHO ---
+            // --- CABEÇALHO ---
             PdfPTable tabelaCabecalho = new PdfPTable(2);
             tabelaCabecalho.setWidthPercentage(100);
             tabelaCabecalho.setWidths(new float[]{1, 4});
@@ -103,135 +351,104 @@ public class DesvioProtocoloController {
             PdfPCell celulaLogo = new PdfPCell();
             celulaLogo.setBorder(0);
             try {
-                // --- ATUALIZAÇÃO DA LOGO AQUI ---
-                // Certifique-se que o arquivo está na pasta src/main/resources/br/com/regge/
                 String caminhoLogo = getClass().getResource("elora_assinatura_simbolo_verde.png").toExternalForm();
                 Image img = Image.getInstance(caminhoLogo);
-                img.scaleToFit(120, 60); // Ajuste o tamanho se precisar
+                img.scaleToFit(120, 60);
                 celulaLogo.addElement(img);
             } catch (Exception e) {
-                System.out.println("Erro ao carregar logo: " + e.getMessage());
-                celulaLogo.addElement(new Paragraph("ELORA"));
+                celulaLogo.addElement(new Paragraph("LOGO"));
             }
             tabelaCabecalho.addCell(celulaLogo);
 
             Font fonteTitulo = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
             Paragraph pTitulo = new Paragraph("Desvio de Protocolo", fonteTitulo);
             pTitulo.setAlignment(Element.ALIGN_CENTER);
-            
+
             PdfPCell celulaTexto = new PdfPCell(pTitulo);
             celulaTexto.setBorder(0);
             celulaTexto.setVerticalAlignment(Element.ALIGN_MIDDLE);
             celulaTexto.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabelaCabecalho.addCell(celulaTexto);
-
             documento.add(tabelaCabecalho);
-            documento.add(new Paragraph(" ")); 
+            documento.add(new Paragraph(" "));
 
-            // --- 3. TEXTO INTRODUTÓRIO (ESPAÇAMENTO REDUZIDO) ---
+            // --- INTRO ---
             Font fonteTexto = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
-            String textoIntro = "A Coordenadora do Comitê de Ética em Pesquisa com Seres Humanos: Sra Maria Luiza Vieira e Vieira.\n" +
-                                "Vimos por meio desta, encaminhar ao Comitê de Ética, os desvios na condução do protocolo que estão abaixo descritos:";
-            
-            Paragraph pIntro = new Paragraph(textoIntro, fonteTexto);
-            pIntro.setAlignment(Element.ALIGN_JUSTIFIED);
-            
-            // --- AQUI ESTÁ A MÁGICA DO ESPAÇAMENTO ---
-            // O valor padrão é uns 16. Colocando 12 fica bem juntinho.
-            pIntro.setLeading(12); 
+            Paragraph pIntro = new Paragraph("A Coordenadora do Comitê de Ética... (Texto Padrão)", fonteTexto);
             pIntro.setSpacingAfter(15);
             documento.add(pIntro);
 
-            // --- 4. TABELA PRINCIPAL ---
+            // --- TABELA DE DADOS ---
             PdfPTable tabelaDados = new PdfPTable(9);
             tabelaDados.setWidthPercentage(100);
             tabelaDados.setWidths(new float[]{2, 2, 2, 1.5f, 1.5f, 4, 3, 2, 2});
-            
+
             Font fonteHeader = new Font(Font.FontFamily.HELVETICA, 9, Font.BOLD, BaseColor.WHITE);
             Font fonteCelula = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL);
 
-            String[] titulos = {"Estudo", "Patroc.", "Investigador", "Tipo", "Nº Pac.", "Descrição", "Ação Tomada", "Data Monit.", "Data Atual"};
-            
+            String[] titulos = {"Estudo", "Patroc.", "Investigador", "Tipo", "Nº Pac.", "Descrição", "Ação", "Data Ocor.", "Data Desvio"};
             for (String t : titulos) {
                 PdfPCell c = new PdfPCell(new Phrase(t, fonteHeader));
                 c.setBackgroundColor(BaseColor.DARK_GRAY);
                 c.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                c.setPadding(4);
                 tabelaDados.addCell(c);
             }
-            
-            tabelaDados.setHeaderRows(1); 
+            tabelaDados.setHeaderRows(1);
 
-            // Preenche dados
-            adicionarCelulaTabela(tabelaDados, valEstudo, fonteCelula);
-            adicionarCelulaTabela(tabelaDados, valPatrocinador, fonteCelula);
-            adicionarCelulaTabela(tabelaDados, valInvestigador, fonteCelula);
-            adicionarCelulaTabela(tabelaDados, valTipo, fonteCelula);
-            adicionarCelulaTabela(tabelaDados, valPaciente, fonteCelula);
-            adicionarCelulaTabela(tabelaDados, valDescricao, fonteCelula);
-            adicionarCelulaTabela(tabelaDados, valAcao, fonteCelula);
-            adicionarCelulaTabela(tabelaDados, valDataMonitoria, fonteCelula);
-            adicionarCelulaTabela(tabelaDados, valDataAtual, fonteCelula);
+            // USA OS DADOS DO REGISTRO DA TABELA
+            adicionarCelula(tabelaDados, dados.getEstudo(), fonteCelula);
+            adicionarCelula(tabelaDados, dados.getPatrocinador(), fonteCelula);
+            adicionarCelula(tabelaDados, dados.getInvestigador(), fonteCelula);
+            adicionarCelula(tabelaDados, "Desvio", fonteCelula);
+            adicionarCelula(tabelaDados, dados.getNomePaciente(), fonteCelula);
+            adicionarCelula(tabelaDados, dados.getDescricao(), fonteCelula);
+            adicionarCelula(tabelaDados, "Reorientação", fonteCelula);
+            adicionarCelula(tabelaDados, dados.getDataOcorrencia(), fonteCelula);
+            adicionarCelula(tabelaDados, dados.getDataDesvio(), fonteCelula);
 
             documento.add(tabelaDados);
 
-            // --- 5. ASSINATURAS ---
+            // --- ASSINATURAS ---
             documento.add(new Paragraph(" "));
             documento.add(new Paragraph(" "));
-            documento.add(new Paragraph(" "));
-            documento.add(new Paragraph(" ")); 
 
             PdfPTable tabelaAssinaturas = new PdfPTable(2);
             tabelaAssinaturas.setWidthPercentage(100);
-            tabelaAssinaturas.setKeepTogether(true); 
 
-            Font fonteAssinaturaTitulo = new Font(Font.FontFamily.HELVETICA, 9, Font.BOLD);
+            Font fonteAssinatura = new Font(Font.FontFamily.HELVETICA, 9, Font.BOLD);
 
-            // Assinatura 1
             PdfPCell ass1 = new PdfPCell();
             ass1.setBorder(0);
             ass1.setHorizontalAlignment(Element.ALIGN_CENTER);
-            ass1.addElement(new Paragraph("___________________________________", fonteTexto));
-            ass1.addElement(new Paragraph("\"Nome do Pesquisador\"", fonteTexto)); 
-            ass1.addElement(new Paragraph("Investigador Principal", fonteAssinaturaTitulo)); 
-            
-            // Assinatura 2
+            ass1.addElement(new Paragraph("__________________________", fonteTexto));
+            ass1.addElement(new Paragraph(dados.getInvestigador(), fonteTexto));
+            ass1.addElement(new Paragraph("Investigador Principal", fonteAssinatura));
+
             PdfPCell ass2 = new PdfPCell();
             ass2.setBorder(0);
             ass2.setHorizontalAlignment(Element.ALIGN_CENTER);
-            ass2.addElement(new Paragraph("___________________________________", fonteTexto));
-            ass2.addElement(new Paragraph("\"Nome do Coordenador\"", fonteTexto)); 
-            ass2.addElement(new Paragraph("Coordenador de Estudos", fonteAssinaturaTitulo));
+            ass2.addElement(new Paragraph("__________________________", fonteTexto));
+            ass2.addElement(new Paragraph(dados.getCoordenador(), fonteTexto));
+            ass2.addElement(new Paragraph("Coordenador de Estudos", fonteAssinatura));
 
             tabelaAssinaturas.addCell(ass1);
             tabelaAssinaturas.addCell(ass2);
-
             documento.add(tabelaAssinaturas);
 
-            System.out.println("PDF Paisagem gerado com sucesso!");
+            documento.close();
+
+            // Abre o arquivo
+            java.awt.Desktop.getDesktop().open(new java.io.File(nomeArquivo));
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (documento.isOpen()) documento.close();
-        }
-
-        try {
-            java.awt.Desktop.getDesktop().open(new java.io.File("Relatorio_Desvio_Completo.pdf"));
-        } catch (Exception e) { 
-            System.out.println("Não foi possível abrir o PDF automaticamente.");
         }
     }
-    
-    // --- MÉTODO AUXILIAR AJUSTADO PARA CENTRALIZAR ---
-    private void adicionarCelulaTabela(PdfPTable tabela, String texto, Font fonte) {
-        PdfPCell celula = new PdfPCell(new Phrase(texto, fonte));
-        celula.setPadding(4);
-        // Alinhamento Horizontal (Esquerda <-> Direita) = Centro
-        celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-        // Alinhamento Vertical (Topo <-> Base) = Meio
-        celula.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        tabela.addCell(celula);
+
+    private void adicionarCelula(PdfPTable tabela, String texto, Font fonte) {
+        PdfPCell c = new PdfPCell(new Phrase(texto, fonte));
+        c.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        tabela.addCell(c);
     }
 }

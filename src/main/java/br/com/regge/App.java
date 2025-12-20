@@ -15,7 +15,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        BancoDeDadosFake.inicializarDados();
         Parent root = loadFXML("primary");
         scene = new Scene(root);
 
