@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class PrimaryController {
@@ -73,16 +74,21 @@ public class PrimaryController {
 
     // --- CADASTRO DE ESTUDOS ---
     @FXML
-    private void onMenuCadastroDadosEstudosClicked(ActionEvent event) {
-        System.out.println("Clicou em 'Cadastro Dados Estudos'!");
+    void onMenuCadastrarEstudo(ActionEvent event) {
         try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("CadastroDadosEstudos.fxml"));
-            Stage novaJanela = new Stage();
-            novaJanela.setTitle("Cadastro Dados dos Estudos");
-            Scene cena = new Scene(fxml);
-            novaJanela.setScene(cena);
-            novaJanela.show();
-        } catch (IOException e) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioEstudo.fxml"));
+            Parent root = loader.load();
+
+            FormularioEstudoController controller = loader.getController();
+            controller.setEstudo(null); // NULL indica que é um NOVO cadastro
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Cadastrar Novo Estudo");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

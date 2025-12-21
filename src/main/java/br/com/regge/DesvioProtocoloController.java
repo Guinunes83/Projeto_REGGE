@@ -4,6 +4,10 @@ package br.com.regge;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList; // <--- NOVO
+import java.util.HashMap;   // <--- NOVO
+import java.util.List;      // <--- NOVO
+import java.util.Map;       // <--- NOVO
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -23,6 +27,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,7 +42,7 @@ public class DesvioProtocoloController {
     @FXML
     private ComboBox<String> estudosDesvioP;
     @FXML
-    private TextField piDesvioP; // Pode ser invisível ou removido se não usar mais
+    private TextField piDesvioP;
     @FXML
     private TextField nCentroDesvioP;
     @FXML
@@ -51,6 +56,7 @@ public class DesvioProtocoloController {
     @FXML
     private TextArea descricaoDesvioP;
 
+    // Assinaturas e Seleção
     @FXML
     private RadioButton rbInvestigadorPrincipal;
     @FXML
@@ -59,8 +65,10 @@ public class DesvioProtocoloController {
     private ComboBox<String> cmbPesquisadorResponsavel;
     @FXML
     private ComboBox<Membro> cmbCoordenador;
+    @FXML
+    private Label lblAvisoErro;
 
-    // --- Tabela e Colunas (Ids devem ser iguais no Scene Builder) ---
+    // --- Tabela e Colunas ---
     @FXML
     private TableView<DesvioRegistro> tabListaDesvioP;
     @FXML
@@ -89,9 +97,11 @@ public class DesvioProtocoloController {
 
     @FXML
     public void initialize() {
-        System.out.println(">>> INICIANDO TELA DE DESVIO <<<");
+        if (lblAvisoErro != null) {
+            lblAvisoErro.setVisible(false);
+            lblAvisoErro.setText("Deve ser marcada o pesquisador rsponsavel, Coordenador do estudo e minimo de 01 linha na tabela acima");
+        }
 
-        // Configura RadioButtons
         grupoInvestigador = new ToggleGroup();
         if (rbInvestigadorPrincipal != null && rbSubInvestigador != null) {
             rbInvestigadorPrincipal.setToggleGroup(grupoInvestigador);
@@ -100,16 +110,11 @@ public class DesvioProtocoloController {
             rbInvestigadorPrincipal.setOnAction(e -> atualizarComboPesquisador(true));
             rbSubInvestigador.setOnAction(e -> atualizarComboPesquisador(false));
 
-            // Define um padrão para não começar vazio
             rbInvestigadorPrincipal.setSelected(true);
-        } else {
-            System.err.println("ERRO: RadioButtons não encontrados! Verifique os fx:id no SceneBuilder.");
         }
 
-        // Configura Tabela
         configurarTabela();
 
-        // Carregar Estudos
         if (estudosDesvioP != null) {
             for (Estudo estudo : BancoDeDadosFake.getEstudos()) {
                 estudosDesvioP.getItems().add(estudo.getNome());
@@ -117,18 +122,14 @@ public class DesvioProtocoloController {
             estudosDesvioP.setOnAction(event -> aoSelecionarEstudo());
         }
 
-        // Carregar Coordenadores
         if (cmbCoordenador != null) {
             for (Membro m : BancoDeDadosMembros.getMembros()) {
                 if (m.getFuncao().toLowerCase().contains("coordenador")) {
                     cmbCoordenador.getItems().add(m);
                 }
             }
-        } else {
-            System.err.println("ERRO: Combo Coordenador não encontrado! Verifique fx:id=cmbCoordenador");
         }
 
-        // Listener Paciente
         if (nomePacienteDesvioP != null) {
             nomePacienteDesvioP.setOnAction(event -> {
                 Participante p = nomePacienteDesvioP.getValue();
@@ -139,20 +140,8 @@ public class DesvioProtocoloController {
         }
     }
 
-    private void configurarRadioButtons() {
-        grupoInvestigador = new ToggleGroup();
-        if (rbInvestigadorPrincipal != null && rbSubInvestigador != null) {
-            rbInvestigadorPrincipal.setToggleGroup(grupoInvestigador);
-            rbSubInvestigador.setToggleGroup(grupoInvestigador);
-
-            // Lógica solicitada:
-            rbInvestigadorPrincipal.setOnAction(e -> atualizarComboPesquisador(true));
-            rbSubInvestigador.setOnAction(e -> atualizarComboPesquisador(false));
-        }
-    }
-
-    private void configurarTabela() {
-        // Dizendo para as colunas qual campo da classe DesvioRegistro elas devem olhar
+    private void configuringTabela() {
+        // Correção de digitação: configurarTabela
         colSelecionar.setCellValueFactory(new PropertyValueFactory<>("selecionar"));
         colEstudo.setCellValueFactory(new PropertyValueFactory<>("estudo"));
         colInvestigador.setCellValueFactory(new PropertyValueFactory<>("investigador"));
@@ -163,37 +152,24 @@ public class DesvioProtocoloController {
         colDataDesvio.setCellValueFactory(new PropertyValueFactory<>("dataDesvio"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colDataGeracao.setCellValueFactory(new PropertyValueFactory<>("dataGeracao"));
-
         tabListaDesvioP.setItems(listaDesvios);
     }
 
-    private void carregarDadosIniciais() {
-        if (estudosDesvioP != null) {
-            for (Estudo estudo : BancoDeDadosFake.getEstudos()) {
-                estudosDesvioP.getItems().add(estudo.getNome());
-            }
-            estudosDesvioP.setOnAction(event -> aoSelecionarEstudo());
-        }
-
-        if (nomePacienteDesvioP != null) {
-            nomePacienteDesvioP.setOnAction(event -> {
-                Participante p = nomePacienteDesvioP.getValue();
-                if (p != null) {
-                    nPacienteDesvioP.setText(p.getNumero());
-                }
-            });
-        }
-
-        if (cmbCoordenador != null) {
-            for (Membro m : BancoDeDadosMembros.getMembros()) {
-                if (m.getFuncao().toLowerCase().contains("coordenador")) {
-                    cmbCoordenador.getItems().add(m);
-                }
-            }
-        }
+    // Método duplicado corrigido para configurarTabela acima
+    private void configurarTabela() {
+        colSelecionar.setCellValueFactory(new PropertyValueFactory<>("selecionar"));
+        colEstudo.setCellValueFactory(new PropertyValueFactory<>("estudo"));
+        colInvestigador.setCellValueFactory(new PropertyValueFactory<>("investigador"));
+        colCentro.setCellValueFactory(new PropertyValueFactory<>("centro"));
+        colNomePaciente.setCellValueFactory(new PropertyValueFactory<>("nomePaciente"));
+        colNumPaciente.setCellValueFactory(new PropertyValueFactory<>("numPaciente"));
+        colDataOcorrencia.setCellValueFactory(new PropertyValueFactory<>("dataOcorrencia"));
+        colDataDesvio.setCellValueFactory(new PropertyValueFactory<>("dataDesvio"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colDataGeracao.setCellValueFactory(new PropertyValueFactory<>("dataGeracao"));
+        tabListaDesvioP.setItems(listaDesvios);
     }
 
-    // --- LÓGICA DO RADIO BUTTON ---
     private void atualizarComboPesquisador(boolean isPrincipal) {
         if (cmbPesquisadorResponsavel == null) {
             return;
@@ -201,7 +177,6 @@ public class DesvioProtocoloController {
         cmbPesquisadorResponsavel.getItems().clear();
 
         if (isPrincipal) {
-            // Se for Principal, pega SÓ o PI do estudo selecionado
             String nomeEstudo = estudosDesvioP.getValue();
             if (nomeEstudo != null) {
                 for (Estudo e : BancoDeDadosFake.getEstudos()) {
@@ -213,7 +188,6 @@ public class DesvioProtocoloController {
                 }
             }
         } else {
-            // Se for Sub-Investigador, lista TODOS os membros
             for (Membro m : BancoDeDadosMembros.getMembros()) {
                 cmbPesquisadorResponsavel.getItems().add(m.getNome());
             }
@@ -245,7 +219,9 @@ public class DesvioProtocoloController {
 
         if (nomePacienteDesvioP != null) {
             nomePacienteDesvioP.getItems().clear();
-            nPacienteDesvioP.setText("");
+            if (nPacienteDesvioP != null) {
+                nPacienteDesvioP.setText("");
+            }
             for (Participante p : BancoDeDadosParticipantes.getParticipantes()) {
                 if (p.getEstudo().equals(nomeEstudo)) {
                     nomePacienteDesvioP.getItems().add(p);
@@ -253,34 +229,25 @@ public class DesvioProtocoloController {
             }
         }
 
-        // Atualiza o combo de pesquisador caso já esteja marcado "Investigador Principal"
-        if (rbInvestigadorPrincipal.isSelected()) {
+        if (rbInvestigadorPrincipal != null && rbInvestigadorPrincipal.isSelected()) {
             atualizarComboPesquisador(true);
         }
     }
 
-    // --- BOTÃO CADASTRAR (ADICIONAR NA TABELA) ---
     @FXML
     void onBtnCadastrarDesvioP(ActionEvent event) {
-        System.out.println(">>> CLIQUE NO BOTÃO CADASTRAR <<<");
-
         try {
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
             String estudo = (estudosDesvioP.getValue() != null) ? estudosDesvioP.getValue() : "-";
             String investigador = (cmbPesquisadorResponsavel.getValue() != null) ? cmbPesquisadorResponsavel.getValue() : "-";
             String centro = nCentroDesvioP.getText();
             String nomePac = (nomePacienteDesvioP.getValue() != null) ? nomePacienteDesvioP.getValue().getNome() : "";
             String numPac = nPacienteDesvioP.getText();
-
-            // Tratamento de datas vazias para não dar erro
             String dtOcorrencia = (dataOcorrenciaDesvioP.getValue() != null) ? dataOcorrenciaDesvioP.getValue().format(fmt) : "-";
             String dtDesvio = (dataDesvioP.getValue() != null) ? dataDesvioP.getValue().format(fmt) : "-";
-
             String descricao = descricaoDesvioP.getText();
             String coordenador = (cmbCoordenador.getValue() != null) ? cmbCoordenador.getValue().getNome() : "";
 
-            // Busca Patrocinador
             String patrocinador = "";
             for (Estudo e : BancoDeDadosFake.getEstudos()) {
                 if (e.getNome().equals(estudo)) {
@@ -291,53 +258,83 @@ public class DesvioProtocoloController {
 
             DesvioRegistro registro = new DesvioRegistro(estudo, investigador, centro, nomePac, numPac,
                     dtOcorrencia, dtDesvio, descricao, patrocinador, coordenador);
-
             listaDesvios.add(registro);
-            tabListaDesvioP.refresh(); // Força a atualização visual
-
-            System.out.println("SUCESSO: Registro adicionado! Total na lista: " + listaDesvios.size());
+            tabListaDesvioP.refresh();
+            if (lblAvisoErro != null) {
+                lblAvisoErro.setVisible(false);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("ERRO AO CADASTRAR: " + e.getMessage());
         }
     }
 
+    // --- NOVA LÓGICA: AGRUPAMENTO POR ESTUDO ---
     @FXML
     void onBtnGerarDesvioP(ActionEvent event) {
-        System.out.println("Verificando itens selecionados para PDF...");
+        System.out.println(">>> INICIANDO GERAÇÃO AGRUPADA... <<<");
 
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        String dataHoraAtual = LocalDate.now().atTime(java.time.LocalTime.now()).format(fmt);
+        // 1. Validações
+        boolean pesquisadorOk = cmbPesquisadorResponsavel.getValue() != null && !cmbPesquisadorResponsavel.getValue().isEmpty();
+        boolean coordenadorOk = cmbCoordenador.getValue() != null;
 
-        boolean gerouAlgum = false;
+        // Verifica linhas selecionadas e AGRUPA por estudo
+        Map<String, List<DesvioRegistro>> mapaAgrupado = new HashMap<>();
+        boolean linhaOk = false;
 
-        // Varre a tabela procurando checkboxes marcados
-        for (DesvioRegistro registro : listaDesvios) {
-            if (registro.getSelecionar().isSelected()) {
-                // Gera o PDF para este registro
-                gerarPDFIndividual(registro);
-
-                // Atualiza a tabela
-                registro.setStatus("Gerado");
-                registro.setDataGeracao(dataHoraAtual);
-                gerouAlgum = true;
+        for (DesvioRegistro r : listaDesvios) {
+            if (r.getSelecionar().isSelected()) {
+                linhaOk = true;
+                // Pega a lista desse estudo (ou cria uma nova se não existir) e adiciona o registro
+                mapaAgrupado.computeIfAbsent(r.getEstudo(), k -> new ArrayList<>()).add(r);
             }
         }
 
-        if (gerouAlgum) {
-            tabListaDesvioP.refresh(); // Atualiza visualmente a tabela
-            System.out.println("Processo concluído.");
-        } else {
-            System.out.println("Nenhum item selecionado na tabela.");
+        if (!pesquisadorOk || !coordenadorOk || !linhaOk) {
+            if (lblAvisoErro != null) {
+                lblAvisoErro.setVisible(true);
+            }
+            return;
         }
+        if (lblAvisoErro != null) {
+            lblAvisoErro.setVisible(false);
+        }
+
+        // Dados de assinatura
+        String nomeInvestigadorAssinatura = cmbPesquisadorResponsavel.getValue();
+        String cargoInvestigadorAssinatura = rbInvestigadorPrincipal.isSelected() ? "Investigador Principal" : "Sub-Investigador";
+        String nomeCoordenadorAssinatura = cmbCoordenador.getValue().getNome();
+
+        // Data Atual para Status
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String dataHoraAtual = LocalDate.now().atTime(java.time.LocalTime.now()).format(fmt);
+
+        // --- GERAÇÃO DOS PDS (UM POR GRUPO/ESTUDO) ---
+        // Percorre o mapa: para cada Estudo (chave), temos uma Lista de Registros (valor)
+        for (Map.Entry<String, List<DesvioRegistro>> entrada : mapaAgrupado.entrySet()) {
+            String nomeDoEstudo = entrada.getKey();
+            List<DesvioRegistro> listaDeRegistrosDoEstudo = entrada.getValue();
+
+            // Gera UM PDF contendo TODAS as linhas dessa lista
+            gerarPDFAgrupado(nomeDoEstudo, listaDeRegistrosDoEstudo, nomeInvestigadorAssinatura, cargoInvestigadorAssinatura, nomeCoordenadorAssinatura);
+
+            // Atualiza o status de todos que foram impressos
+            for (DesvioRegistro reg : listaDeRegistrosDoEstudo) {
+                reg.setStatus("Gerado");
+                reg.setDataGeracao(dataHoraAtual);
+            }
+        }
+
+        tabListaDesvioP.refresh();
+        System.out.println("Processo concluído. PDFs gerados.");
     }
 
-    // Método que gera o PDF usando os dados do OBJETO da tabela, e não da tela
-    private void gerarPDFIndividual(DesvioRegistro dados) {
+    // Método que gera o PDF recebendo uma LISTA de registros
+    private void gerarPDFAgrupado(String nomeEstudo, List<DesvioRegistro> listaRegistros, String nomeInv, String cargoInv, String nomeCoord) {
         try {
-            // Nome do arquivo único para não sobreescrever (usa nome do paciente)
-            String nomeArquivo = "Desvio_" + dados.getNomePaciente().replace(" ", "_") + ".pdf";
+            // Nome do arquivo: Desvio_ESTUDO_Timestamp.pdf (para evitar sobrescrever)
+            String timestamp = String.valueOf(System.currentTimeMillis());
+            String nomeArquivo = "Desvio_" + nomeEstudo.replace(" ", "_") + "_" + timestamp + ".pdf";
 
             Document documento = new Document(PageSize.A4.rotate());
             PdfWriter.getInstance(documento, new FileOutputStream(nomeArquivo));
@@ -361,7 +358,7 @@ public class DesvioProtocoloController {
             tabelaCabecalho.addCell(celulaLogo);
 
             Font fonteTitulo = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
-            Paragraph pTitulo = new Paragraph("Desvio de Protocolo", fonteTitulo);
+            Paragraph pTitulo = new Paragraph("Desvio de Protocolo - " + nomeEstudo, fonteTitulo);
             pTitulo.setAlignment(Element.ALIGN_CENTER);
 
             PdfPCell celulaTexto = new PdfPCell(pTitulo);
@@ -374,11 +371,12 @@ public class DesvioProtocoloController {
 
             // --- INTRO ---
             Font fonteTexto = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
-            Paragraph pIntro = new Paragraph("A Coordenadora do Comitê de Ética... (Texto Padrão)", fonteTexto);
+            Paragraph pIntro = new Paragraph("A Coordenadora do Comitê de Ética em Pesquisa com Seres Humanos: Sra Maria Luiza Vieira e Vieira.\n"
+                    + "Vimos por meio desta, encaminhar ao Comitê de Ética, os desvios na condução do protocolo que estão abaixo descritos:", fonteTexto);
             pIntro.setSpacingAfter(15);
             documento.add(pIntro);
 
-            // --- TABELA DE DADOS ---
+            // --- TABELA PRINCIPAL ---
             PdfPTable tabelaDados = new PdfPTable(9);
             tabelaDados.setWidthPercentage(100);
             tabelaDados.setWidths(new float[]{2, 2, 2, 1.5f, 1.5f, 4, 3, 2, 2});
@@ -395,16 +393,18 @@ public class DesvioProtocoloController {
             }
             tabelaDados.setHeaderRows(1);
 
-            // USA OS DADOS DO REGISTRO DA TABELA
-            adicionarCelula(tabelaDados, dados.getEstudo(), fonteCelula);
-            adicionarCelula(tabelaDados, dados.getPatrocinador(), fonteCelula);
-            adicionarCelula(tabelaDados, dados.getInvestigador(), fonteCelula);
-            adicionarCelula(tabelaDados, "Desvio", fonteCelula);
-            adicionarCelula(tabelaDados, dados.getNomePaciente(), fonteCelula);
-            adicionarCelula(tabelaDados, dados.getDescricao(), fonteCelula);
-            adicionarCelula(tabelaDados, "Reorientação", fonteCelula);
-            adicionarCelula(tabelaDados, dados.getDataOcorrencia(), fonteCelula);
-            adicionarCelula(tabelaDados, dados.getDataDesvio(), fonteCelula);
+            // --- LOOP PARA ADICIONAR VÁRIAS LINHAS NA MESMA TABELA ---
+            for (DesvioRegistro reg : listaRegistros) {
+                adicionarCelula(tabelaDados, reg.getEstudo(), fonteCelula);
+                adicionarCelula(tabelaDados, reg.getPatrocinador(), fonteCelula);
+                adicionarCelula(tabelaDados, reg.getInvestigador(), fonteCelula); // Usa o investigador do registro
+                adicionarCelula(tabelaDados, "Desvio", fonteCelula);
+                adicionarCelula(tabelaDados, reg.getNomePaciente(), fonteCelula);
+                adicionarCelula(tabelaDados, reg.getDescricao(), fonteCelula);
+                adicionarCelula(tabelaDados, "Reorientação", fonteCelula);
+                adicionarCelula(tabelaDados, reg.getDataOcorrencia(), fonteCelula);
+                adicionarCelula(tabelaDados, reg.getDataDesvio(), fonteCelula);
+            }
 
             documento.add(tabelaDados);
 
@@ -414,21 +414,24 @@ public class DesvioProtocoloController {
 
             PdfPTable tabelaAssinaturas = new PdfPTable(2);
             tabelaAssinaturas.setWidthPercentage(100);
+            tabelaAssinaturas.setKeepTogether(true);
 
             Font fonteAssinatura = new Font(Font.FontFamily.HELVETICA, 9, Font.BOLD);
 
+            // Assinatura Esquerda (Investigador Selecionado AGORA)
             PdfPCell ass1 = new PdfPCell();
             ass1.setBorder(0);
             ass1.setHorizontalAlignment(Element.ALIGN_CENTER);
             ass1.addElement(new Paragraph("__________________________", fonteTexto));
-            ass1.addElement(new Paragraph(dados.getInvestigador(), fonteTexto));
-            ass1.addElement(new Paragraph("Investigador Principal", fonteAssinatura));
+            ass1.addElement(new Paragraph(nomeInv, fonteTexto));
+            ass1.addElement(new Paragraph(cargoInv, fonteAssinatura));
 
+            // Assinatura Direita (Coordenador Selecionado AGORA)
             PdfPCell ass2 = new PdfPCell();
             ass2.setBorder(0);
             ass2.setHorizontalAlignment(Element.ALIGN_CENTER);
             ass2.addElement(new Paragraph("__________________________", fonteTexto));
-            ass2.addElement(new Paragraph(dados.getCoordenador(), fonteTexto));
+            ass2.addElement(new Paragraph(nomeCoord, fonteTexto));
             ass2.addElement(new Paragraph("Coordenador de Estudos", fonteAssinatura));
 
             tabelaAssinaturas.addCell(ass1);
@@ -437,7 +440,7 @@ public class DesvioProtocoloController {
 
             documento.close();
 
-            // Abre o arquivo
+            // Abre o PDF gerado
             java.awt.Desktop.getDesktop().open(new java.io.File(nomeArquivo));
 
         } catch (Exception e) {

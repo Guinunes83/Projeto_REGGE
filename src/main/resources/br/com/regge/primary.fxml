@@ -34,6 +34,16 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Setores">
             <items>
+                  <Menu mnemonicParsing="false" text="Administrativo">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Auditoria">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Coordenação">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onMenuDesvioProtocoloClicked" text="Desvio de Protocolo" />
@@ -42,32 +52,50 @@
                         <MenuItem mnemonicParsing="false" text="Estoque Kit's" />
                     </items>
                   </Menu>
-              <MenuItem mnemonicParsing="false" text="Administrativo" />
-                  <MenuItem mnemonicParsing="false" text="Auditoria" />
-                  <MenuItem mnemonicParsing="false" text="Enfermagem" />
-                  <MenuItem mnemonicParsing="false" text="Ensino" />
-                  <MenuItem mnemonicParsing="false" text="Farmácia" />
-                  <MenuItem mnemonicParsing="false" text="Financeiro" />
+                  <Menu mnemonicParsing="false" text="Enfermagem">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Ensino">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Farmácia">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Financeiro">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Regulatório">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onMenuReuniaoCEPClicked" text="Reunião CEP" />
-                        <MenuItem mnemonicParsing="false" onAction="#onMenuDadosEstudosClicked" text="Dados Estudos" />
                     </items>
                   </Menu>
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Cadastrar">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Cadastrar Monitores" />
+                  <MenuItem mnemonicParsing="false" onAction="#onMenuCadastrarEstudo" text="Cadastrar Estudos" />
+                  <MenuItem mnemonicParsing="false" text="Cadastrar Participantes" />
+                  <MenuItem mnemonicParsing="false" text="Cadastrar Membros" />
+                  <MenuItem mnemonicParsing="false" onAction="#onMenuEstoqueKitsClicked" text="Cadastrar Kit's" />
+                  <MenuItem mnemonicParsing="false" text="Cadastrar Perfis" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Dados">
             <items>
-                  <Menu mnemonicParsing="false" onAction="#onMenuDadosEstudosClicked" text="Dados Estudos">
-                     <items>
-                    <MenuItem mnemonicParsing="false" onAction="#onMenuCadastroDadosEstudosClicked" text="Cadastro Estudos" />
-                     </items>
-                  </Menu>
-                  <MenuItem mnemonicParsing="false" text="Cadastro Monitores" />
-                  <MenuItem mnemonicParsing="false" text="Cadastro Participantes" />
-                  <MenuItem mnemonicParsing="false" text="Cadastro Membros" />
-                  <MenuItem mnemonicParsing="false" onAction="#onMenuEstoqueKitsClicked" text="Cadastro Kit's" />
-                  <MenuItem mnemonicParsing="false" text="Cadastro Perfis" />
+                  <MenuItem mnemonicParsing="false" text="Dados Membros" />
+                  <MenuItem mnemonicParsing="false" text="Dados Pacientes" />
+                  <MenuItem mnemonicParsing="false" onAction="#onMenuDadosEstudosClicked" text="Dados Estudos" />
+                  <MenuItem mnemonicParsing="false" text="Dados Monitores" />
+                  <MenuItem mnemonicParsing="false" text="Dados Participantes" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">

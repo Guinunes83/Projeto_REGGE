@@ -498,7 +498,7 @@
                   </StackPane>
                   <HBox alignment="TOP_RIGHT">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Editar" textFill="#2618a4">
+                        <Button fx:id="btnEditarDadosEstudos" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Editar" textFill="#2618a4">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

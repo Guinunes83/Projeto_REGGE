@@ -14,36 +14,46 @@ public class App extends Application {
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException {
-        Parent root = loadFXML("primary");
-        scene = new Scene(root);
-
+    public void start(Stage stage) { // Note que removi o "throws IOException" daqui
         try {
-            Image icone = new Image(getClass().getResourceAsStream("icone_grupo_elora.png"));
-            stage.getIcons().add(icone);
+            // Tenta carregar a tela principal
+            Parent root = loadFXML("primary");
+            scene = new Scene(root);
+
+            // Tenta carregar o ícone
+            try {
+                Image icone = new Image(getClass().getResourceAsStream("icone_grupo_elora.png"));
+                stage.getIcons().add(icone);
+            } catch (Exception e) {
+                System.out.println("Aviso: Ícone não encontrado (Isso não impede o programa de rodar).");
+            }
+
+            stage.setTitle("Projeto REGGE - Sistema de Gestão");
+            stage.setScene(scene);
+
+            // Tamanho Fixo e Centralizado
+            stage.setWidth(900);
+            stage.setHeight(600);
+            stage.centerOnScreen();
+
+            stage.show();
+
         } catch (Exception e) {
-            System.out.println("Ícone não encontrado.");
+            // --- AQUI ESTÁ O SEGREDO ---
+            // Se der erro, ele vai gritar no terminal
+            System.err.println("\n\n=======================================================");
+            System.err.println("ERRO FATAL AO INICIAR O PROGRAMA:");
+            System.err.println("=======================================================");
+            e.printStackTrace();
+            System.err.println("=======================================================\n\n");
         }
-
-        stage.setTitle("Projeto REGGE - Sistema de Gestão");
-        stage.setScene(scene);
-
-        // --- MUDANÇA AQUI: Tamanho Fixo e Centralizado ---
-        stage.setWidth(900); // Largura
-        stage.setHeight(600); // Altura
-        stage.centerOnScreen(); // Centraliza no monitor
-        // -------------------------------------------------
-
-        stage.show();
     }
 
-    // --- ADICIONE ISTO ---
     @Override
     public void stop() throws Exception {
         super.stop();
         System.exit(0);
     }
-    // ---------------------
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
