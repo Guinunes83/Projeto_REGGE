@@ -103,6 +103,10 @@ public class DesvioProtocoloController {
     @FXML
     private TableColumn<DesvioRegistro, Void> colAcoes;
 
+    // --- NOVA COLUNA DESCRIÇÃO ---
+    @FXML
+    private TableColumn<DesvioRegistro, String> colDescricao;
+
     private ToggleGroup grupoInvestigador;
     private ObservableList<DesvioRegistro> listaDesvios = FXCollections.observableArrayList();
 
@@ -132,7 +136,6 @@ public class DesvioProtocoloController {
             rbInvestigadorPrincipal.setToggleGroup(grupoInvestigador);
             rbSubInvestigador.setToggleGroup(grupoInvestigador);
 
-            // Agora atualiza baseado na TABELA, se houver seleção
             rbInvestigadorPrincipal.setOnAction(e -> atualizarComboPesquisador(true));
             rbSubInvestigador.setOnAction(e -> atualizarComboPesquisador(false));
 
@@ -176,6 +179,14 @@ public class DesvioProtocoloController {
         colNumPaciente.setCellValueFactory(new PropertyValueFactory<>("numPaciente"));
         colDataOcorrencia.setCellValueFactory(new PropertyValueFactory<>("dataOcorrencia"));
         colDataDesvio.setCellValueFactory(new PropertyValueFactory<>("dataDesvio"));
+
+        // --- VINCULANDO A DESCRIÇÃO À COLUNA ---
+        // Se o fx:id no FXML estiver certo, isso vai jogar o texto lá dentro
+        if (colDescricao != null) {
+            colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        }
+        // ---------------------------------------
+
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colDataGeracao.setCellValueFactory(new PropertyValueFactory<>("dataGeracao"));
         tabListaDesvioP.setItems(listaDesvios);
@@ -234,8 +245,6 @@ public class DesvioProtocoloController {
         colAcoes.setCellFactory(cellFactory);
     }
 
-    // --- NOVA LÓGICA DE ASSINATURA BASEADA NA TABELA ---
-    // Método auxiliar: Descobre se temos linhas selecionadas e se são todas do mesmo estudo
     private String getEstudoUnicoSelecionado() {
         String estudoEncontrado = null;
         boolean temSelecao = false;
@@ -244,13 +253,13 @@ public class DesvioProtocoloController {
             if (r.getSelecionar().isSelected()) {
                 temSelecao = true;
                 if (estudoEncontrado == null) {
-                    estudoEncontrado = r.getEstudo(); // Primeiro encontrado
+                    estudoEncontrado = r.getEstudo();
                 } else if (!estudoEncontrado.equals(r.getEstudo())) {
-                    return "MISTO"; // Encontrou estudos diferentes misturados
+                    return "MISTO";
                 }
             }
         }
-        return temSelecao ? estudoEncontrado : null; // Retorna o nome, "MISTO" ou null (se nada selecionado)
+        return temSelecao ? estudoEncontrado : null;
     }
 
     private void atualizarComboPesquisador(boolean isPrincipal) {
@@ -259,16 +268,13 @@ public class DesvioProtocoloController {
         }
         cmbPesquisadorResponsavel.getItems().clear();
 
-        // 1. Tenta pegar o estudo da TABELA primeiro
         String estudoAlvo = getEstudoUnicoSelecionado();
 
-        // 2. Se a tabela não tiver seleção válida, usa o formulário lá de cima (Comportamento antigo)
         if (estudoAlvo == null || estudoAlvo.equals("MISTO")) {
             estudoAlvo = estudosDesvioP.getValue();
         }
 
         if (isPrincipal) {
-            // Busca o PI do estudo identificado (seja da tabela ou do form)
             if (estudoAlvo != null) {
                 for (Estudo e : BancoDeDadosFake.getEstudos()) {
                     if (e.getNome().equals(estudoAlvo)) {
@@ -279,19 +285,16 @@ public class DesvioProtocoloController {
                 }
             }
         } else {
-            // Se for Sub-Investigador, lista todos
             for (Membro m : BancoDeDadosMembros.getMembros()) {
                 cmbPesquisadorResponsavel.getItems().add(m.getNome());
             }
         }
     }
 
-    // --- GERAÇÃO DE PDF COM RESTRIÇÃO DE ESTUDO ÚNICO ---
     @FXML
     void onBtnGerarDesvioP(ActionEvent event) {
         System.out.println(">>> INICIANDO GERAÇÃO (MODO RESTRITO) <<<");
 
-        // 1. Validar Seleção da Tabela (Regra: Mesmos Estudos)
         String estudoUnico = getEstudoUnicoSelecionado();
 
         if (estudoUnico == null) {
@@ -304,7 +307,6 @@ public class DesvioProtocoloController {
             return;
         }
 
-        // 2. Validar Assinaturas (Elas devem estar preenchidas lá embaixo)
         boolean pesquisadorOk = cmbPesquisadorResponsavel.getValue() != null && !cmbPesquisadorResponsavel.getValue().isEmpty();
         boolean coordenadorOk = cmbCoordenador.getValue() != null;
 
@@ -313,17 +315,14 @@ public class DesvioProtocoloController {
             return;
         }
 
-        // Se passou daqui, está tudo certo! Esconde o erro.
         if (lblAvisoErro != null) {
             lblAvisoErro.setVisible(false);
         }
 
-        // 3. Preparar Dados
         String nomeInvestigadorAssinatura = cmbPesquisadorResponsavel.getValue();
         String cargoInvestigadorAssinatura = rbInvestigadorPrincipal.isSelected() ? "Investigador Principal" : "Sub-Investigador";
         String nomeCoordenadorAssinatura = cmbCoordenador.getValue().getNome();
 
-        // 4. Filtrar lista para enviar apenas os selecionados
         List<DesvioRegistro> linhasParaImprimir = new ArrayList<>();
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         String dataHoraAtual = LocalDate.now().atTime(java.time.LocalTime.now()).format(fmt);
@@ -331,13 +330,11 @@ public class DesvioProtocoloController {
         for (DesvioRegistro r : listaDesvios) {
             if (r.getSelecionar().isSelected()) {
                 linhasParaImprimir.add(r);
-                // Já atualiza o status na tabela
                 r.setStatus("Gerado");
                 r.setDataGeracao(dataHoraAtual);
             }
         }
 
-        // 5. Gerar PDF Único
         gerarPDFUnico(estudoUnico, linhasParaImprimir, nomeInvestigadorAssinatura, cargoInvestigadorAssinatura, nomeCoordenadorAssinatura);
 
         tabListaDesvioP.refresh();
@@ -352,7 +349,6 @@ public class DesvioProtocoloController {
         }
         System.out.println(msg);
 
-        // Opcional: Mostrar um Popup também
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Atenção");
         alert.setHeaderText(null);
@@ -425,9 +421,6 @@ public class DesvioProtocoloController {
             for (DesvioRegistro reg : listaRegistros) {
                 adicionarCelula(tabelaDados, reg.getEstudo(), fonteCelula);
                 adicionarCelula(tabelaDados, reg.getPatrocinador(), fonteCelula);
-                // Agora usamos o investigador SELECIONADO para assinar, não o da linha
-                // Mas na tabela, a coluna 'Investigador' geralmente mostra o PI do estudo.
-                // Vamos manter o dado original da linha aqui para registro histórico:
                 adicionarCelula(tabelaDados, reg.getInvestigador(), fonteCelula);
                 adicionarCelula(tabelaDados, "Desvio", fonteCelula);
                 adicionarCelula(tabelaDados, reg.getNomePaciente(), fonteCelula);
@@ -482,7 +475,6 @@ public class DesvioProtocoloController {
         tabela.addCell(c);
     }
 
-    // --- Outros Métodos Auxiliares ---
     private void carregarDadosParaEdicao(DesvioRegistro registro) {
         estudosDesvioP.setValue(registro.getEstudo());
         aoSelecionarEstudo();
@@ -588,19 +580,14 @@ public class DesvioProtocoloController {
             DesvioRegistro registro = new DesvioRegistro(estudo, investigador, centro, nomePac, numPac,
                     dtOcorrencia, dtDesvio, descricao, patrocinador, coordenador);
 
-            // --- A CORREÇÃO ESTÁ AQUI: O GATILHO DA CHECKBOX ---
-            // Assim que cria a linha, adicionamos uma ação na caixinha de seleção dela
             registro.getSelecionar().setOnAction(e -> {
                 boolean isPrincipal = rbInvestigadorPrincipal.isSelected();
                 atualizarComboPesquisador(isPrincipal);
             });
-            // ---------------------------------------------------
 
             listaDesvios.add(registro);
             tabListaDesvioP.refresh();
-
             autoAjustarColunas(tabListaDesvioP);
-
             if (lblAvisoErro != null) {
                 lblAvisoErro.setVisible(false);
             }

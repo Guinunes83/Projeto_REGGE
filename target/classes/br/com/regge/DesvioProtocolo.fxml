@@ -107,6 +107,7 @@
                   <TableColumn fx:id="colEstudo" prefWidth="211.0" text="Estudo" />
                   <TableColumn fx:id="colInvestigador" prefWidth="181.0" text="PI" />
                   <TableColumn fx:id="colCentro" prefWidth="112.0" text="N° do Centro" />
+                  <TableColumn fx:id="colDescricao" prefWidth="109.0" text="Descrição" />
                   <TableColumn fx:id="colNomePaciente" prefWidth="216.0" text="Nome do Paciente" />
                   <TableColumn fx:id="colNumPaciente" prefWidth="109.0" text="N° do Paciente" />
                   <TableColumn fx:id="colDataOcorrencia" prefWidth="112.0" text="Data Ocorrência" />
