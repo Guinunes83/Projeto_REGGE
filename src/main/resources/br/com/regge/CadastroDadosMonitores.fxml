@@ -1,118 +1,254 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.regge.CadastroDadosMonitoresController">
+<VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="1485.0" style="-fx-border-color: #2d786f; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.regge.CadastroDadosMonitoresController">
    <children>
-      <StackPane alignment="TOP_CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="219.0" prefWidth="1525.0">
          <children>
-            <VBox alignment="TOP_CENTER" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #bfbfbf; -fx-border-width: 2; -fx-padding: 10;">
-               <StackPane.margin>
-                  <Insets />
-               </StackPane.margin>
+            <VBox alignment="CENTER" style="-fx-background-color: #2d786f;">
                <children>
-                  <HBox alignment="TOP_CENTER">
-                     <children>
-                        <VBox prefHeight="45.0" prefWidth="220.0">
-                           <children>
-                              <Label text="Nome">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField />
-                           </children>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="45.0" prefWidth="103.0">
-                           <children>
-                              <Label text="Função">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox prefWidth="150.0" />
-                           </children>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="50.0" prefWidth="155.0">
-                           <children>
-                              <Label text="Estudo">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox prefWidth="150.0" />
-                           </children>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="45.0" prefWidth="128.0">
-                           <children>
-                              <Label text="Telefone">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField />
-                           </children>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="45.0" prefWidth="272.0">
-                           <children>
-                              <Label text="E-mail">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField />
-                           </children>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <TableView>
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </TableView>
+                  <Label alignment="TOP_CENTER" text="Cadastro de Monitor" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
                </children>
-            </VBox>
-            <Label alignment="TOP_CENTER" style="-fx-background-color: #f4f4f4;" text="Cadastro de Monitores" textFill="#2d786f" translateY="-20.0">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
                <padding>
-                  <Insets left="10.0" right="10.0" />
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </padding>
-            </Label>
+            </VBox>
+            <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #e4e4e4;">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Geral" textFill="#2d786f">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="22.0" prefWidth="1177.0">
+               <children>
+                  <VBox prefHeight="45.0" prefWidth="220.0">
+                     <children>
+                        <Label text="Nome">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="nomeMonitor" prefHeight="6.0" prefWidth="220.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="45.0" prefWidth="134.0">
+                     <children>
+                        <Label text="Função">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="funcaoMonitor" prefHeight="25.0" prefWidth="178.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="50.0" prefWidth="155.0">
+                     <children>
+                        <Label text="Estudo">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="estudoMonitor" prefHeight="25.0" prefWidth="197.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="45.0" prefWidth="128.0">
+                     <children>
+                        <Label text="CRO">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="croEstudo" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="45.0" prefWidth="272.0">
+                     <children>
+                        <Label text="Patrocinador">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="patrocinadorEstudo" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="45.0" prefWidth="196.0">
+                     <children>
+                        <Label text="Telefone">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="telefoneMonitor" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="45.0" prefWidth="231.0">
+                     <children>
+                        <Label text="E-mail">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="emailMonitor" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <VBox alignment="CENTER" style="-fx-background-color: #e4e4e4;">
+               <children>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="25.0" style="-fx-background-color: #e4e4e4;" text="Logins" textFill="#2d786f">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="37.0" prefWidth="1410.0">
+               <children>
+                  <VBox prefHeight="90.0" prefWidth="177.0">
+                     <children>
+                        <Label text="Login Windows">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="loginWindows" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Senha Windows">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="senhaWindows" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox layoutX="202.0" layoutY="15.0">
+                     <children>
+                        <Label text="Login Tasy">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="loginTasy" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox layoutX="361.0" layoutY="15.0" prefHeight="17.0" prefWidth="149.0">
+                     <children>
+                        <Label text="Senha Tasy">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="senhaTasy" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="55.0" prefWidth="121.0">
+                     <children>
+                        <Button fx:id="btnCadastrarMonitor" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Cadastrar" textFill="#2d786f">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+            <Insets />
          </VBox.margin>
-      </StackPane>
+      </VBox>
+      <TableView fx:id="tabDadosMonitor" prefHeight="175.0" prefWidth="1481.0">
+         <columns>
+            <TableColumn fx:id="colNomeMonitor" prefWidth="155.0" text="Nome" />
+            <TableColumn fx:id="colFuncaoMonitor" minWidth="5.0" prefWidth="140.0" text="Função" />
+            <TableColumn fx:id="colEstudoMonitor" prefWidth="151.0" text="Estudo" />
+            <TableColumn fx:id="colCroMonitor" prefWidth="104.0" text="CRO" />
+            <TableColumn fx:id="colPatrocinadorMonitor" prefWidth="94.0" text="Patrocinador" />
+            <TableColumn fx:id="colContatoMonitor" prefWidth="159.0" text="Contato" />
+            <TableColumn fx:id="colEmailMonitor" prefWidth="136.0" text="E-mail" />
+            <TableColumn fx:id="colLoginWindowsMonitor" prefWidth="136.0" text="Login Windows" />
+            <TableColumn fx:id="colSenhaWindowsMonitor" prefWidth="111.0" text="Senha Windows" />
+            <TableColumn fx:id="colLoginTasyMonitor" prefWidth="111.0" text="Login Tasy" />
+            <TableColumn fx:id="colSenhaTasyMonitor" prefWidth="111.0" text="Senha Tasy" />
+            <TableColumn fx:id="colAcoes" prefWidth="74.0" text="Ações" />
+         </columns>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </TableView>
    </children>
 </VBox>

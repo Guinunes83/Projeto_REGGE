@@ -124,4 +124,19 @@ public class PrimaryController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void onCadastroDadosMonitorClicked(ActionEvent event) {
+        System.out.println("Clicou no 'Cadatro Dados Monitor'!");
+        try {
+            Parent fxml = FXMLLoader.load(getClass().getResource("CadastroDadosMonitores.fxml"));
+            Stage novaJanela = new Stage();
+            novaJanela.setTitle("Cadastro Dados Monitor");
+            Scene cena = new Scene(fxml);
+            novaJanela.setScene(cena);
+            novaJanela.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -81,7 +81,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Cadastrar">
               <items>
-                  <MenuItem mnemonicParsing="false" text="Cadastrar Monitores" />
+                  <MenuItem mnemonicParsing="false" onAction="#onCadastroDadosMonitorClicked" text="Cadastrar Monitores" />
                   <MenuItem mnemonicParsing="false" onAction="#onMenuCadastrarEstudo" text="Cadastrar Estudos" />
                   <MenuItem mnemonicParsing="false" text="Cadastrar Participantes" />
                   <MenuItem mnemonicParsing="false" text="Cadastrar Membros" />

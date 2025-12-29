@@ -102,8 +102,6 @@ public class DesvioProtocoloController {
     private TableColumn<DesvioRegistro, String> colDataGeracao;
     @FXML
     private TableColumn<DesvioRegistro, Void> colAcoes;
-
-    // --- NOVA COLUNA DESCRIÇÃO ---
     @FXML
     private TableColumn<DesvioRegistro, String> colDescricao;
 
@@ -179,9 +177,7 @@ public class DesvioProtocoloController {
         colNumPaciente.setCellValueFactory(new PropertyValueFactory<>("numPaciente"));
         colDataOcorrencia.setCellValueFactory(new PropertyValueFactory<>("dataOcorrencia"));
         colDataDesvio.setCellValueFactory(new PropertyValueFactory<>("dataDesvio"));
-
-        // --- VINCULANDO A DESCRIÇÃO À COLUNA ---
-        // Se o fx:id no FXML estiver certo, isso vai jogar o texto lá dentro
+        
         if (colDescricao != null) {
             colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         }
