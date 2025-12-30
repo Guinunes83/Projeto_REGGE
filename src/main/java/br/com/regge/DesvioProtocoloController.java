@@ -177,14 +177,14 @@ public class DesvioProtocoloController {
         colNumPaciente.setCellValueFactory(new PropertyValueFactory<>("numPaciente"));
         colDataOcorrencia.setCellValueFactory(new PropertyValueFactory<>("dataOcorrencia"));
         colDataDesvio.setCellValueFactory(new PropertyValueFactory<>("dataDesvio"));
-        
-        if (colDescricao != null) {
-            colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        }
-        // ---------------------------------------
-
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colDataGeracao.setCellValueFactory(new PropertyValueFactory<>("dataGeracao"));
+        colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+
+        if (colDescricao != null) {
+        }    colDescricao.setPrefWidth(200);
+        }
+
         tabListaDesvioP.setItems(listaDesvios);
     }
 

@@ -2,26 +2,23 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="646.0" prefWidth="977.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.regge.CadastroDadosPIController">
+<AnchorPane prefHeight="529.0" prefWidth="977.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.regge.CadastroDadosPIController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #2d786f; -fx-border-width: 2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="584.0" prefWidth="977.0" style="-fx-border-color: #2d786f; -fx-border-width: 2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
               <VBox alignment="CENTER" prefHeight="45.0" prefWidth="990.0" style="-fx-background-color: #2d786f;">
                   <children>
-                      <Label text="Cadastro Dados PI" textFill="WHITE">
+                      <Label text="Dados PI" textFill="WHITE">
                           <font>
                               <Font name="System Bold" size="24.0" />
                           </font>
@@ -46,7 +43,11 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <ComboBox prefWidth="150.0" />
+                        <Label fx:id="drDraPi" prefHeight="29.0" prefWidth="70.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </Label>
                             </children>
                             <HBox.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -59,7 +60,11 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField />
+                        <Label fx:id="nomePi" prefHeight="25.0" prefWidth="368.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </Label>
                             </children>
                             <HBox.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -72,7 +77,11 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <ComboBox prefHeight="25.0" prefWidth="201.0" />
+                        <Label fx:id="funcaoPi" prefHeight="25.0" prefWidth="232.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </Label>
                             </children>
                             <HBox.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -88,7 +97,11 @@
                                         <Insets />
                                     </VBox.margin>
                                 </Label>
-                                <TextField />
+                        <Label fx:id="telefonePi" prefHeight="20.0" prefWidth="208.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </Label>
                             </children>
                             <HBox.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -125,7 +138,11 @@
                                               <Font name="System Bold" size="14.0" />
                                           </font>
                                       </Label>
-                                      <TextField />
+                              <Label fx:id="cpfPi" prefHeight="20.0" prefWidth="202.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                                 <font>
+                                    <Font name="System Italic" size="14.0" />
+                                 </font>
+                              </Label>
                                   </children>
                                   <HBox.margin>
                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -138,7 +155,11 @@
                                               <Font name="System Bold" size="14.0" />
                                           </font>
                                       </Label>
-                                      <TextField />
+                              <Label fx:id="crmPi" prefHeight="20.0" prefWidth="123.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                                 <font>
+                                    <Font name="System Italic" size="14.0" />
+                                 </font>
+                              </Label>
                                   </children>
                                   <HBox.margin>
                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -151,7 +172,11 @@
                                               <Font name="System Bold" size="14.0" />
                                           </font>
                                       </Label>
-                                      <TextField />
+                              <Label fx:id="rqePi" prefHeight="20.0" prefWidth="116.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                                 <font>
+                                    <Font name="System Italic" size="14.0" />
+                                 </font>
+                              </Label>
                                   </children>
                                   <HBox.margin>
                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -164,7 +189,11 @@
                                               <Font name="System Bold" size="14.0" />
                                           </font>
                                       </Label>
-                                      <DatePicker />
+                              <Label fx:id="dataNascPi" prefHeight="20.0" prefWidth="183.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                                 <font>
+                                    <Font name="System Italic" size="14.0" />
+                                 </font>
+                              </Label>
                                   </children>
                                   <HBox.margin>
                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -195,7 +224,7 @@
                                           <children>
                                               <Label text="CV e GCP Atuais">
                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font name="System Bold" size="14.0" />
                                                   </font>
                                               </Label>
                                           </children>
@@ -209,7 +238,11 @@
                                                               <Font name="System Bold" size="14.0" />
                                                           </font>
                                                       </Label>
-                                                      <DatePicker prefHeight="25.0" prefWidth="205.0" />
+                                          <Label fx:id="dataCvAtualPi" prefHeight="25.0" prefWidth="377.0" style="-fx-background-color: #e4e4e4;" text="Label" textAlignment="CENTER" textFill="#434fd0">
+                                             <font>
+                                                <Font name="System Italic" size="14.0" />
+                                             </font>
+                                          </Label>
                                                   </children>
                                                   <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -222,7 +255,11 @@
                                                               <Font name="System Bold" size="14.0" />
                                                           </font>
                                                       </Label>
-                                                      <DatePicker prefHeight="25.0" prefWidth="215.0" />
+                                          <Label fx:id="dataGcpAtualPi" prefHeight="20.0" prefWidth="327.0" style="-fx-background-color: #e4e4e4;" text="Label" textAlignment="CENTER" textFill="#434fd0">
+                                             <font>
+                                                <Font name="System Italic" size="14.0" />
+                                             </font>
+                                          </Label>
                                                   </children>
                                                   <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -234,7 +271,11 @@
                               </VBox>
                               <HBox alignment="CENTER" prefHeight="72.0" prefWidth="133.0">
                                   <children>
-                                      <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                      <Separator orientation="VERTICAL" prefHeight="200.0">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Separator>
                                   </children>
                               </HBox>
                               <VBox prefHeight="72.0" prefWidth="400.0">
@@ -243,7 +284,7 @@
                                           <children>
                                               <Label text="CV e GCP Próximo Vencimento">
                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font name="System Bold" size="14.0" />
                                                   </font>
                                               </Label>
                                           </children>
@@ -257,11 +298,11 @@
                                                               <Font name="System Bold" size="14.0" />
                                                           </font>
                                                       </Label>
-                                                      <Label text="00/00/0000" textAlignment="CENTER">
-                                                          <font>
-                                                              <Font name="System Italic" size="14.0" />
-                                                          </font>
-                                                      </Label>
+                                          <Label fx:id="dataCvVencPi" prefHeight="20.0" prefWidth="212.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                                             <font>
+                                                <Font name="System Italic" size="14.0" />
+                                             </font>
+                                          </Label>
                                                   </children>
                                                   <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -274,11 +315,11 @@
                                                               <Font name="System Bold" size="14.0" />
                                                           </font>
                                                       </Label>
-                                                      <Label text="00/00/0000" textAlignment="CENTER">
-                                                          <font>
-                                                              <Font name="System Italic" size="14.0" />
-                                                          </font>
-                                                      </Label>
+                                          <Label fx:id="dataGcpVencPi" prefHeight="20.0" prefWidth="228.0" style="-fx-background-color: #e4e4e4;" text="Label" textFill="#434fd0">
+                                             <font>
+                                                <Font name="System Italic" size="14.0" />
+                                             </font>
+                                          </Label>
                                                   </children>
                                                   <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -303,72 +344,16 @@
                           </children>
                       </HBox>
                       <HBox alignment="CENTER" prefHeight="29.0" prefWidth="980.0" />
-                      <HBox alignment="CENTER" prefHeight="29.0" prefWidth="980.0">
-                          <children>
-                              <VBox prefHeight="45.0" prefWidth="177.0">
-                                  <children>
-                                      <Label text="Nome Plataforma / Site">
-                                          <font>
-                                              <Font name="System Bold" size="14.0" />
-                                          </font>
-                                      </Label>
-                                      <TextField />
-                                  </children>
-                                  <HBox.margin>
-                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                  </HBox.margin>
-                              </VBox>
-                              <VBox prefHeight="45.0" prefWidth="207.0">
-                                  <children>
-                                      <Label text="Login">
-                                          <font>
-                                              <Font name="System Bold" size="14.0" />
-                                          </font>
-                                      </Label>
-                                      <TextField />
-                                  </children>
-                                  <HBox.margin>
-                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                  </HBox.margin>
-                              </VBox>
-                              <VBox prefHeight="45.0" prefWidth="180.0">
-                                  <children>
-                                      <Label text="Senha">
-                                          <font>
-                                              <Font name="System Bold" size="14.0" />
-                                          </font>
-                                      </Label>
-                                      <TextField />
-                                  </children>
-                                  <HBox.margin>
-                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                  </HBox.margin>
-                              </VBox>
-                              <VBox prefHeight="45.0" prefWidth="367.0">
-                                  <children>
-                                      <Label text="Link">
-                                          <font>
-                                              <Font name="System Bold" size="14.0" />
-                                          </font>
-                                      </Label>
-                                      <TextField />
-                                  </children>
-                                  <HBox.margin>
-                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                  </HBox.margin>
-                              </VBox>
-                          </children>
-                      </HBox>
                   </children>
               </VBox>
               <VBox prefHeight="200.0" prefWidth="100.0">
                   <children>
-                      <TableView prefHeight="200.0" prefWidth="200.0">
+                      <TableView fx:id="tabelaAcessoPi" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                              <TableColumn prefWidth="224.0" text="Plataforma" />
-                              <TableColumn prefWidth="181.0" text="Login" />
-                        <TableColumn prefWidth="203.0" text="Senha" />
-                        <TableColumn prefWidth="344.0" text="Link" />
+                              <TableColumn fx:id="colPlataformaPi" prefWidth="224.0" text="Plataforma" />
+                              <TableColumn fx:id="colLoginPi" prefWidth="181.0" text="Login" />
+                        <TableColumn fx:id="colSenhaPi" prefWidth="203.0" text="Senha" />
+                        <TableColumn fx:id="colLinkPi" prefWidth="344.0" text="Link" />
                           </columns>
                           <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -380,20 +365,15 @@
                <children>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Cancelar" textFill="#c31111">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Cadastrar" textFill="#2d786f">
+                        <Button fx:id="btnEditarPi" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Editar" textFill="#434fd0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
                <VBox.margin>

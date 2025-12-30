@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CadastroDadosMonitoresController {
 
+    //Campos formulário de cadastro de monitores
     @FXML
     private TextField nomeMonitor;
     @FXML
@@ -38,7 +39,7 @@ public class CadastroDadosMonitoresController {
     private Button btnCadastrarMonitor;
     @FXML
     private Label lblAvisoErro;
-
+    //Tabela de visualização de dados dos monitores
     @FXML
     private TableView<DadosMonitores> tabDadosMonitor;
     @FXML
@@ -82,9 +83,6 @@ public class CadastroDadosMonitoresController {
             colAcoes.setResizable(false);
         }
 
-        configurarTabela();
-        configurarColunaAcoes();
-
         private void configurarTabela() {
             colNomeMonitor.setCellValueFactory(new PropertyValueFactory<>("Nome"));
             colFuncaoMonitor.setCellValueFactory(new PropertyValueFactory<>("Funcao"));
@@ -97,7 +95,19 @@ public class CadastroDadosMonitoresController {
             colSenhaWindowsMonitor.setCellValueFactory(new PropertyValueFactory<>("SenhaWindows"));
             colLoginTasyMonitor.setCellValueFactory(new PropertyValueFactory<>("LoginTasy"));
             colSenhaTasyMonitor.setCellValueFactory(new PropertyValueFactory<>("SenhaTasy"));
+            colAcoes.setCellValueFactory(new PropertyValueFactory<>("Ação"));
         }
+
+        private void configurarColunaAcoes() {
+            if(colAcoes != null) {
+                return;
+            }
+        }
+
+
+
+        configurarTabela();
+        configurarColunaAcoes();
 
     }
 }

@@ -6,17 +6,13 @@ public class DesvioRegistro {
 
     private CheckBox selecionar;
     private String estudo;
-    private String investigador; // Se não estiver usando na tabela, pode manter ou remover
+    private String investigador;
     private String centro;
     private String nomePaciente;
+    private String descricao;
     private String numPaciente;
     private String dataOcorrencia;
     private String dataDesvio;
-
-    // --- ESTE É O CAMPO IMPORTANTE ---
-    private String descricao;
-    // ---------------------------------
-
     private String status;
     private String dataGeracao;
 
