@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CadastroDadosMonitoresController {
 
-    //Campos formulário de cadastro de monitores
+    // Campos formulário de cadastro de monitores
     @FXML
     private TextField nomeMonitor;
     @FXML
@@ -39,7 +39,7 @@ public class CadastroDadosMonitoresController {
     private Button btnCadastrarMonitor;
     @FXML
     private Label lblAvisoErro;
-    //Tabela de visualização de dados dos monitores
+    // Tabela de visualização de dados dos monitores
     @FXML
     private TableView<DadosMonitores> tabDadosMonitor;
     @FXML
@@ -77,37 +77,35 @@ public class CadastroDadosMonitoresController {
 
         //Configuração da tabela com colunas fixas
         if (colAcoes != null) {
-            colAcoes.setPrefwidth(90);
+            colAcoes.setPrefWidth(90);
             colAcoes.setMinWidth(90);
             colAcoes.setMaxWidth(90);
             colAcoes.setResizable(false);
         }
-
-        private void configurarTabela() {
+    }
+    // configuração do nome das colunas da tabela
+    private void configurarTabela() {
             colNomeMonitor.setCellValueFactory(new PropertyValueFactory<>("Nome"));
             colFuncaoMonitor.setCellValueFactory(new PropertyValueFactory<>("Funcao"));
             colEstudoMonitor.setCellValueFactory(new PropertyValueFactory<>("Estudo"));
             colCroMonitor.setCellValueFactory(new PropertyValueFactory<>("Cro"));
             colPatrocinadorMonitor.setCellValueFactory(new PropertyValueFactory<>("Patrocinador"));
             colContatoMonitor.setCellValueFactory(new PropertyValueFactory<>("Contato"));
-            colEmailMonitor.setCellFactory(new PropertyValueFactory<>("Email"));
+            colEmailMonitor.setCellValueFactory(new PropertyValueFactory<>("Email"));
             colLoginWindowsMonitor.setCellValueFactory(new PropertyValueFactory<>("LoginWindows"));
             colSenhaWindowsMonitor.setCellValueFactory(new PropertyValueFactory<>("SenhaWindows"));
             colLoginTasyMonitor.setCellValueFactory(new PropertyValueFactory<>("LoginTasy"));
             colSenhaTasyMonitor.setCellValueFactory(new PropertyValueFactory<>("SenhaTasy"));
             colAcoes.setCellValueFactory(new PropertyValueFactory<>("Ação"));
-        }
-
-        private void configurarColunaAcoes() {
-            if(colAcoes != null) {
-                return;
-            }
-        }
-
-
-
-        configurarTabela();
-        configurarColunaAcoes();
-
     }
-}
+    private void configurarColunaAcoes() {
+        if (colAcoes != null) {
+            return;
+        }
+    }
+
+    configurarTabela();
+
+    configurarColunaAcoes();
+
+}}

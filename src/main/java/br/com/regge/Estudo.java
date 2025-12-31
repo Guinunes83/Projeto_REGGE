@@ -19,10 +19,10 @@ public class Estudo {
     private String observacao;
 
     // Construtor Gigante (Para preencher tudo de uma vez)
-    public Estudo(String nome, String protocolo, String patrocinador, String pi, String cro, 
-                  String coordenador, String patologia, String recrutamento, String numeroCentro, 
-                  String caae, String monitor, String emailMonitor, String tipoEstudo, 
-                  String administracao, String observacao) {
+    public Estudo(String nome, String protocolo, String patrocinador, String pi, String cro,
+            String coordenador, String patologia, String recrutamento, String numeroCentro,
+            String caae, String monitor, String emailMonitor, String tipoEstudo,
+            String administracao, String observacao) {
         this.nome = nome;
         this.protocolo = protocolo;
         this.patrocinador = patrocinador;
@@ -41,27 +41,72 @@ public class Estudo {
     }
 
     // --- GETTERS (Para o sistema conseguir ler os dados) ---
-    public String getNome() { return nome; }
-    public String getProtocolo() { return protocolo; }
-    public String getPatrocinador() { return patrocinador; }
-    public String getPi() { return pi; }
-    public String getCro() { return cro; }
-    public String getCoordenador() { return coordenador; }
-    public String getPatologia() { return patologia; }
-    public String getRecrutamento() { return recrutamento; }
-    public String getNumeroCentro() { return numeroCentro; }
-    public String getCaae() { return caae; }
-    public String getMonitor() { return monitor; }
-    public String getEmailMonitor() { return emailMonitor; }
-    public String getTipoEstudo() { return tipoEstudo; }
-    public String getAdministracao() { return administracao; }
-    public String getObservacao() { return observacao; }
-    
+    public String getNome() {
+        return nome;
+    }
+
+    public String getProtocolo() {
+        return protocolo;
+    }
+
+    public String getPatrocinador() {
+        return patrocinador;
+    }
+
+    public String getPi() {
+        return pi;
+    }
+
+    public String getCro() {
+        return cro;
+    }
+
+    public String getCoordenador() {
+        return coordenador;
+    }
+
+    public String getPatologia() {
+        return patologia;
+    }
+
+    public String getRecrutamento() {
+        return recrutamento;
+    }
+
+    public String getNumeroCentro() {
+        return numeroCentro;
+    }
+
+    public String getCaae() {
+        return caae;
+    }
+
+    public String getMonitor() {
+        return monitor;
+    }
+
+    public String getEmailMonitor() {
+        return emailMonitor;
+    }
+
+    public String getTipoEstudo() {
+        return tipoEstudo;
+    }
+
+    public String getAdministracao() {
+        return administracao;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
     // Método toString para facilitar a exibição em listas simples se precisar
     @Override
     public String toString() {
         return nome;
     }
+
     // --- CONSTRUTOR DE COMPATIBILIDADE (Para o código antigo funcionar) ---
     // Ele recebe os 4 dados antigos e preenche o resto com vazio ""
     public Estudo(String nome, String protocolo, String patrocinador, String recrutamento) {
